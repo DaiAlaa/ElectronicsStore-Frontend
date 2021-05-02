@@ -15,7 +15,7 @@
         What's in your mind?
       </p>
       <input class="searchInput" placeholder="Tap to search .."/>
-      <!-- <Categories /> -->
+      <Categories />
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@
   background-size: 100% auto;
   height: calc(100vh);
   width: 100%;
+  position: fixed;
 }
 .sign {
   border: none;
@@ -84,11 +85,11 @@
 
 <script>
 // @ is an alias to /src
-// import Categories from "@/components/Categories.vue";
+import Categories from "@/components/Categories.vue";
 export default {
   name: "Home",
-  // components: {
-  //   Categories
-  // },
+  components: {
+    Categories
+  },
 };
 </script>
