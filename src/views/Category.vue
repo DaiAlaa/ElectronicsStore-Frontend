@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div class="home">
+    <div class="categoryPage">
       <router-link to="/SignUp">
         <button class="sign">
           SIGN UP
@@ -19,29 +18,19 @@
         Admin Panel
         <i class="fa fa-user"></i>
       </button> -->
-      <img class="logo"
-            src="../assets/elctroShop1.jpeg"
-            alt="logo"
-      />
       <p class="search">
         What's in your mind?
       </p>
       <input class="searchInput" placeholder="Tap to search .."/>
       <h3> Cameras : </h3>
-      <ProductCard />
+      <div class="row">
+        <ProductCard />
+      </div>
     </div>
-  </div>
 </template>
 <style lang="scss" scoped>
-.home {
-  // background-image: url("../assets/wall3.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #161516;
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  overflow-y: scroll;
+.categoryPage {
+    height: 100%;
 }
 .sign {
   border: none;
@@ -112,15 +101,6 @@ i {
   color: #161516;
   margin-left: 4%;
 }
-.logo {
-  width: 16%;
-  height: 20%;
-  position: absolute;
-  // background: transparent;
-  margin-left: -35%;
-  border-radius: 50%;
-  margin-top: 2%;
-}
 h3 {
   font-size: 35px;
   color: white;
@@ -131,13 +111,20 @@ h3 {
   margin-bottom: 3%;
   margin-top: 4%;
 }
+.row{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 120px;
+    padding-left: 4%;
+    /* padding-right: 2%; */
+}
 </style>
 
 <script>
 // @ is an alias to /src
 import ProductCard from "@/components/ProductCard.vue";
 export default {
-  name: "Home",
+  name: "Category",
   components: {
     ProductCard
   },

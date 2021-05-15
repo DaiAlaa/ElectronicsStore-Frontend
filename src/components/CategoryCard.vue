@@ -1,5 +1,4 @@
 <template>
-  <div class="row justify-content-center">
     <div class="card rounded col-lg-30%">
         <img
         class="card-img-top mx-auto d-block"
@@ -21,7 +20,6 @@
             ></router-link>
         </div>
     </div>
-  </div>
 </template>
 <style scoped>
 .card {
@@ -49,11 +47,6 @@ p {
   color: #fff44f;
   position: absolute;
   margin-left: 2%;
-}
-.row{
-    height: 100%;
-    width: 100%;
-    margin-bottom: 120px;
 }
 </style>
 <script>

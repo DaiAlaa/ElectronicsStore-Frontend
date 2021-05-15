@@ -1,5 +1,4 @@
 <template>
-  <div class="row">
     <div class="card rounded col-lg-20%">
         <img
         class="card-img-top mx-auto d-block"
@@ -30,7 +29,6 @@
         ></router-link> -->
         </div>
     </div>
-  </div>
 </template>
 <style scoped>
 .card {
@@ -68,13 +66,6 @@ h5 {
   color: #fff44f;
   position: absolute;
   /* margin-top: 10%; */
-}
-.row{
-    height: 100%;
-    width: 100%;
-    margin-bottom: 120px;
-    padding-left: 4%;
-    /* padding-right: 2%; */
 }
 .viewProduct{
   color: black;

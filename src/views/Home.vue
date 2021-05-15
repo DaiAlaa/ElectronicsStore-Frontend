@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div class="home">
+    <div class="homePage">
       <router-link to="/SignUp">
         <button class="sign">
           SIGN UP
@@ -11,10 +10,6 @@
           LOG IN
         </button>
       </router-link>
-      <img class="logo"
-        src="../assets/elctroShop1.jpeg"
-        alt="logo"
-      />
       <button class="add"> 
         Add Product
         <i class="fa fa-plus"></i>
@@ -27,20 +22,14 @@
         What's in your mind?
       </p>
       <input class="searchInput" placeholder="Tap to search .."/>
-      <CategoryCard />
+      <div class="row justify-content-center">
+        <CategoryCard />
+      </div>
     </div>
-  </div>
 </template>
 <style lang="scss" scoped>
-.home {
-  // background-image: url("../assets/wall3.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #161516;
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  overflow-y: scroll;
+.homePage {
+    height: 100%;
 }
 .sign {
   border: none;
@@ -111,14 +100,10 @@ i {
   color: #161516;
   margin-left: 4%;
 }
-.logo {
-  width: 16%;
-  height: 20%;
-  position: absolute;
-  // background: transparent;
-  margin-left: -35%;
-  border-radius: 50%;
-  margin-top: 2%;
+.row{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 120px;
 }
 </style>
 

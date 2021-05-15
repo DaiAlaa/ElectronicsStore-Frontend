@@ -1,21 +1,18 @@
 <template>
-  <div class="home">
-    <router-link to="/SignUp">
+    <div class="productPage">
+      <router-link to="/SignUp">
         <button class="sign">
           SIGN UP
         </button>
-    </router-link>
-    <router-link to="/">
+      </router-link>
+      <router-link to="/">
         <button class="log">
           LOG IN
         </button>
-    </router-link>
-    <img class="logo"
-            src="../assets/elctroShop1.jpeg"
-            alt="logo"
-    />
-    <div class="container">
-      <div class="row row1">
+      </router-link>
+      <hr>
+      <div class="container">
+        <div class="row row1">
           <div class="col">
             <img
               class="productImage"
@@ -39,30 +36,24 @@
             <hr>
             <button class="buy">Buy Now</button>
           </div>
-      </div>
-      <div class="row row2">
-        <div class="col">
-          <img 
-            class="shop"
-            src="../assets/shop6.png"
-          />
         </div>
-        <div class="col lets">
-          Let's go shopping!
+        <div class="row row2">
+          <div class="col">
+            <img 
+              class="shop"
+              src="../assets/shop6.png"
+            />
+          </div>
+          <div class="col lets">
+            Let's go shopping!
+          </div>
         </div>
       </div>
     </div>
-  </div> 
 </template>
 <style lang="scss" scoped>
-.home {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #161516;
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  overflow-y: scroll;
+.productPage {
+    height: 100%;
 }
 .sign {
   border: none;
@@ -95,19 +86,11 @@
 .sign:hover, .log:hover {
   height: 6.5%;
 }
-.logo {
-  width: 16%;
-  height: 20%;
-  position: absolute;
-  margin-left: -47%;
-  border-radius: 50%;
-  margin-top: 2%;
-}
 .container {
   height: 100%;
   width: 100%;
   margin-top: 20%;
-  display: fixed;
+//   display: fixed;
   bottom: 0;
 }
 .row1{
@@ -174,8 +157,10 @@
   margin-top: -8%;
 }
 </style>
+
 <script>
 export default {
+    name: "Product",
     data: function() {
     return {
       isActive1 : false,
