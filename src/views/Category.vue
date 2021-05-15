@@ -11,10 +11,6 @@
           LOG IN
         </button>
       </router-link>
-      <img class="logo"
-        src="../assets/elctroShop1.jpeg"
-        alt="logo"
-      />
       <button class="add"> 
         Add Product
         <i class="fa fa-plus"></i>
@@ -23,11 +19,16 @@
         Admin Panel
         <i class="fa fa-user"></i>
       </button> -->
+      <img class="logo"
+            src="../assets/elctroShop1.jpeg"
+            alt="logo"
+      />
       <p class="search">
         What's in your mind?
       </p>
       <input class="searchInput" placeholder="Tap to search .."/>
-      <CategoryCard />
+      <h3> Cameras : </h3>
+      <ProductCard />
     </div>
   </div>
 </template>
@@ -74,7 +75,7 @@
   height: 6.5%;
 }
 .searchInput {
-  margin-top: 13%;
+  margin-top: 7%;
   width: 23%;
   height: 5.5%;
   border-radius: 20px;
@@ -87,7 +88,7 @@
 }
 .search {
   margin-left: 28%;
-  padding-top: 12%;
+  padding-top: 6%;
   width: 10%;
   height: 5%;
   font-size: 20px;
@@ -120,15 +121,25 @@ i {
   border-radius: 50%;
   margin-top: 2%;
 }
+h3 {
+  font-size: 35px;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 3%;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-bottom: 3%;
+  margin-top: 4%;
+}
 </style>
 
 <script>
 // @ is an alias to /src
-import CategoryCard from "@/components/CategoryCard.vue";
+import ProductCard from "@/components/ProductCard.vue";
 export default {
   name: "Home",
   components: {
-    CategoryCard
+    ProductCard
   },
 };
 </script>
