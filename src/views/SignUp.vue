@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <!-- <logo-header /> -->
-    <!-- Sign Up form -->
-    <div class="conatiner signupForm px-0">
-      <div class="row justify-content-center m-0">
-        <div class="col-xl-4 col-lg-4 col-md-5 col-sm-8" align="center">
-          <!-- <divider /> -->
-          <h2>Sign up with your email address</h2>
+  <!-- <logo-header /> -->
+  <!-- Sign Up form -->
+  <div class="conatiner signup-form encor-ligh-theme px-0">
+    <div class="row justify-content-center m-0">
+      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-8" align="center">
+        <h2>Sign up with your email address</h2>
 
-          <form>
+        <form>
           <input
             class="input_field"
             type="email"
@@ -249,7 +247,7 @@
           </p>
           <button
             @click.prevent="signUp()"
-            class="costum-btn"
+            class="costum-btn justify-content-center"
             id="signup-btn"
             type="submit"
             testid="sign up button"
@@ -267,22 +265,29 @@
               Log in
             </router-link>
           </div>
-          </form>
-        </div>
+        </form>
       </div>
     </div>
-    <!-- Sign Up form -->
   </div>
+  <!-- Sign Up form -->
 </template>
 
 <style lang="scss" scoped>
-//@import "../css/global.css";
+// @import "../css/global.css";
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+}
 input {
-  padding: 0px 11.25px;
-  height: 48px;
+  height: 3em;
+  padding: 0.625em 0.625em 0.625em;
   border-radius: 2px;
   border: 1px solid #dfe0e6;
   color: #1c1c1f;
+  width: 100%;
+  margin-bottom: 16px;
+  // background-color: transparent;
 }
 .costum-btn {
   font-size: 14px;
@@ -291,11 +296,9 @@ input {
   padding: 16px 48px 18px;
   margin-bottom: 14px;
   margin-top: 31px;
-
   margin-left: auto;
   margin-right: auto;
   color: #fff;
-
   text-decoration: none;
   font-weight: 700;
   text-align: center;
@@ -307,6 +310,7 @@ input {
   /* min-width: 160px; */
   text-transform: uppercase;
   white-space: normal;
+  float: center;
 }
 
 select {
@@ -323,11 +327,11 @@ select {
 }
 
 .highlight {
-  color: #1db954;
+  color: #0f1549;
   display: inline-block;
 }
 .highlight:hover {
-  color: #1ed760;
+  color: #0f1549;
   cursor: pointer;
 }
 
@@ -336,36 +340,13 @@ select {
   text-align: left;
 }
 
-.signup-form {
-  .input_field {
-    width: 100%;
-    margin-bottom: 16px;
-  }
-  h2 {
-    font-family: Circular, Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    line-height: 1.2;
-    font-weight: 900;
-    color: #1c1c1f;
-    text-align: center;
-    margin-bottom: 18px;
-  }
-}
-#facebook-btn {
-  background-color: #3b5998;
-  max-width: 320px;
-  width: 100%;
-}
-#facebook-btn:hover {
-  background-color: #3a61b3;
-}
 #signup-btn {
-  background-color: #1db954;
+  background-color: #0f1549;
   max-width: 320px;
   width: 100%;
 }
 #signup-btn:hover {
-  background-color: #1ed760;
+  background-color: #0f1549;
 }
 #birthdate {
   label {
@@ -382,6 +363,7 @@ select {
     margin-right: 5%;
     background: url("../assets/arrow.png") 90% / 12% no-repeat;
     width: 40%;
+    background-color: #fff;
   }
   input {
     width: 25%;
@@ -391,25 +373,46 @@ select {
 .country_select {
   width: 100%;
   background: url("../assets/arrow.png") 90% / 5% no-repeat;
+  background-color: #fff;
 }
 #gender {
-  display: inline-block;
+  // display: inline-block;
+  // background-color: transparent;
   input {
     margin-top: 3px;
     border-radius: 2px;
+    width: 15%;
+    margin-bottom: 0px;
+    padding: 0em;
   }
   .gender_field {
     display: inline-block;
     float: left;
+    width: 7%;
   }
   label {
     color: #88898c;
     font-size: 0.9375em;
     text-align: left;
     padding-top: 16px;
-    margin-right: 15px;
+    margin-right: 20px;
     padding-left: 5px;
   }
+}
+.signup-form {
+  background-color: whitesmoke;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  // position: absolute;
+  display: block;
+}
+
+form {
+  height: calc(120vh);
+}
+h2{
+  margin-top: 5%;
 }
 </style>
 

@@ -2,19 +2,13 @@
   <div>
     <div class="home">
       <router-link to="/SignUp">
-        <button class="sign" to="">
-          SIGN UP
-        </button>
+        <button class="sign" to="">SIGN UP</button>
       </router-link>
-      <router-link to="/">
-        <button class="log">
-          LOG IN
-        </button>
+      <router-link to="/Login">
+        <button class="log">LOG IN</button>
       </router-link>
-      <p class="search">
-        What's in your mind?
-      </p>
-      <input class="searchInput" placeholder="Tap to search .."/>
+      <p class="search">What's in your mind?</p>
+      <input class="searchInput" placeholder="Tap to search .." />
       <!-- <Categories /> -->
     </div>
   </div>
@@ -55,7 +49,8 @@
   text-decoration: none;
   outline: none;
 }
-.sign:hover, .log:hover {
+.sign:hover,
+.log:hover {
   height: 6.5%;
 }
 .searchInput {
@@ -77,7 +72,7 @@
   height: 5%;
   font-size: 20px;
   color: rgb(46, 53, 114);
-  position:absolute;
+  position: absolute;
   font-family: cursive;
 }
 </style>
