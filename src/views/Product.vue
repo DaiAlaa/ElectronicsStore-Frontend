@@ -10,6 +10,9 @@
           LOG IN
         </button>
       </router-link>
+      <!-- <button class="userName">
+        user name
+      </button> -->
       <hr>
       <div class="container">
         <div class="row row1">
@@ -85,6 +88,21 @@
 }
 .sign:hover, .log:hover {
   height: 6.5%;
+}
+.userName {
+  border: none;
+  border-radius: 20px;
+  width: 8% auto;
+  height: 5%;
+  margin-top: 2%;
+  margin-left: 52%;
+  position: absolute;
+  background: #313030;
+  color: white;
+  text-decoration: none;
+  outline: none;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .container {
   height: 100%;

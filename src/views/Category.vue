@@ -10,14 +10,24 @@
           LOG IN
         </button>
       </router-link>
-      <button class="add"> 
+      <!-- <button class="userName">
+        user name
+      </button> -->
+      <!-- <button class="add"> 
         Add Product
         <i class="fa fa-plus"></i>
       </button>
-      <!-- <button class="add">
-        Admin Panel
-        <i class="fa fa-user"></i>
-      </button> -->
+      <router-link to="/OrdersDetails">
+        <button class="orders"> 
+          Orders' details
+        </button>
+      </router-link> -->
+      <router-link to="/AdminPanel/ControlUsers">
+        <button class="add">
+          Admin Panel
+          <i class="fa fa-user"></i>
+        </button>
+      </router-link>
       <p class="search">
         What's in your mind?
       </p>
@@ -63,6 +73,21 @@
 .sign:hover, .log:hover {
   height: 6.5%;
 }
+.userName {
+  border: none;
+  border-radius: 20px;
+  width: 8% auto;
+  height: 5%;
+  margin-top: 2%;
+  margin-left: 52%;
+  position: absolute;
+  background: #313030;
+  color: white;
+  text-decoration: none;
+  outline: none;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 .searchInput {
   margin-top: 7%;
   width: 23%;
@@ -88,11 +113,22 @@
 .add {
   border: none;
   border-radius: 20px;
-  width: 10%;
+  width: 11%;
   height: 6%;
   position:absolute;
   margin-top: 9%;
-  margin-left: 50%;
+  margin-left: 49%;
+  background-color: #fff44f;
+  color: #161516;
+}
+.orders {
+  border: none;
+  border-radius: 20px;
+  width: 11%;
+  height: 6%;
+  position:absolute;
+  margin-top: 13%;
+  margin-left: 49%;
   background-color: #fff44f;
   color: #161516;
 }

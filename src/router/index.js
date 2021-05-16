@@ -5,6 +5,8 @@ import SignUp from "../views/SignUp.vue";
 import Category from "../views/Category.vue";
 import Product from "../views/Product.vue";
 import Main from "../views/Main.vue";
+import AdminPanel from "../views/AdminPanel.vue";
+import ControlUsers from "../views/ControlUsers.vue";
 
 Vue.use(VueRouter);
 
@@ -25,6 +27,16 @@ const routes = [
         path: "Product",
         component: Product
       },
+      {
+        path: "AdminPanel",
+        component: AdminPanel,
+        children: [
+          {
+            path: "ControlUsers",
+            component: ControlUsers
+          },
+        ]
+      }
     ]
   },
   {
