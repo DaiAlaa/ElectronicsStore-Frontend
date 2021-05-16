@@ -2,15 +2,53 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import SignUp from "../views/SignUp.vue";
+import Category from "../views/Category.vue";
+import Product from "../views/Product.vue";
+import Main from "../views/Main.vue";
+import AdminPanel from "../views/AdminPanel.vue";
+import ControlUsers from "../views/ControlUsers.vue";
 import Login from "../views/Login.vue";
 import AddProduct from "../views/AddProduct.vue";
+import Statistics from "../views/Statistics.vue";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    component: Main,
+    children: [
+      {
+        path: "",
+        component: Home
+      },
+      {
+        path: "Category",
+        component: Category
+      },
+      {
+        path: "Product",
+        component: Product
+      },
+      {
+        path: "AdminPanel",
+        component: AdminPanel,
+        children: [
+          {
+            path: "ControlUsers",
+            component: ControlUsers
+          },
+          {
+            path: "Statistics",
+            component: Statistics
+          },
+        ]
+      },
+      {
+        path: "/AddProduct",
+        name: "AddProduct",
+        component: AddProduct,
+      },
+    ]
   },
   {
     path: "/SignUp",
@@ -22,11 +60,7 @@ const routes = [
     name: "Login",
     component: Login,
   },
-  {
-    path: "/AddProduct",
-    name: "AddProduct",
-    component: AddProduct,
-  },
+  
 ];
 
 const router = new VueRouter({

@@ -1,12 +1,14 @@
 <template>
-    <div class="homePage">
+    <div class="categoryPage">
       <router-link to="/SignUp">
         <button class="sign">
           SIGN UP
         </button>
       </router-link>
-      <router-link to="/Login">
-        <button class="log">LOG IN</button>
+      <router-link to="/">
+        <button class="log">
+          LOG IN
+        </button>
       </router-link>
       <!-- <button class="userName">
         user name
@@ -30,13 +32,14 @@
         What's in your mind?
       </p>
       <input class="searchInput" placeholder="Tap to search .."/>
-      <div class="row justify-content-center">
-        <CategoryCard />
+      <h3> Cameras : </h3>
+      <div class="row">
+        <ProductCard />
       </div>
     </div>
 </template>
 <style lang="scss" scoped>
-.homePage {
+.categoryPage {
     height: 100%;
 }
 .sign {
@@ -67,8 +70,7 @@
   outline: none;
   font-weight: bold;
 }
-.sign:hover,
-.log:hover {
+.sign:hover, .log:hover {
   height: 6.5%;
 }
 .userName {
@@ -87,7 +89,7 @@
   padding-right: 15px;
 }
 .searchInput {
-  margin-top: 13%;
+  margin-top: 7%;
   width: 23%;
   height: 5.5%;
   border-radius: 20px;
@@ -100,7 +102,7 @@
 }
 .search {
   margin-left: 28%;
-  padding-top: 12%;
+  padding-top: 6%;
   width: 10%;
   height: 5%;
   font-size: 20px;
@@ -135,20 +137,32 @@ i {
   color: #161516;
   margin-left: 4%;
 }
+h3 {
+  font-size: 35px;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 3%;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-bottom: 3%;
+  margin-top: 4%;
+}
 .row{
     height: 100%;
     width: 100%;
     margin-bottom: 120px;
+    padding-left: 4%;
+    /* padding-right: 2%; */
 }
 </style>
 
 <script>
 // @ is an alias to /src
-import CategoryCard from "@/components/CategoryCard.vue";
+import ProductCard from "@/components/ProductCard.vue";
 export default {
-  name: "Home",
+  name: "Category",
   components: {
-    CategoryCard
+    ProductCard
   },
 };
 </script>
