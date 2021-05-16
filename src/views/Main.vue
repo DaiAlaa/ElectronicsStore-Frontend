@@ -1,7 +1,7 @@
 <template>
     <div class="home">
       <img class="logo"
-        src="../assets/elctroShop1.jpeg"
+        src="../assets/GLogo.jpeg"
         alt="logo"
       />
       <router-view class="child"></router-view>
