@@ -19,12 +19,12 @@
   overflow-y: scroll;
 }
 .logo {
-  width: 16%;
+  width: 20%;
   height: 20%;
   position: absolute;
-  margin-left: -47%;
+  margin-left: -49%;
   border-radius: 50%;
-  margin-top: 2%;
+  // margin-top: 2%;
 }
 </style>
 <script>
