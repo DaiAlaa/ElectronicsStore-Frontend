@@ -11,17 +11,19 @@
       <!-- <button class="userName">
         user name
       </button> -->
-      <!-- <button class="add"> 
-        Add Product
-        <i class="fa fa-plus"></i>
-      </button>
+      <router-link to="/AddProduct">
+        <button class="add"> 
+          Add Product
+          <i class="fa fa-plus"></i>
+        </button>
+      </router-link>
       <router-link to="/OrdersDetails">
         <button class="orders"> 
           Orders' details
         </button>
-      </router-link> -->
+      </router-link>
       <router-link to="/AdminPanel/ControlUsers">
-        <button class="add">
+        <button class="Admin">
           Admin Panel
           <i class="fa fa-user"></i>
         </button>
@@ -126,6 +128,17 @@
   height: 6%;
   position:absolute;
   margin-top: 13%;
+  margin-left: 49%;
+  background-color: #fff44f;
+  color: #161516;
+}
+.Admin {
+  border: none;
+  border-radius: 20px;
+  width: 11%;
+  height: 6%;
+  position:absolute;
+  margin-top: 17%;
   margin-left: 49%;
   background-color: #fff44f;
   color: #161516;

@@ -10,6 +10,7 @@ import ControlUsers from "../views/ControlUsers.vue";
 import Login from "../views/Login.vue";
 import AddProduct from "../views/AddProduct.vue";
 import Statistics from "../views/Statistics.vue";
+import OrdersDetails from "../views/OrdersDetails.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -42,6 +43,10 @@ const routes = [
             component: Statistics
           },
         ]
+      },
+      {
+        path: "OrdersDetails",
+        component: OrdersDetails,
       },
       {
         path: "/AddProduct",
