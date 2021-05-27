@@ -25,11 +25,11 @@
             />
           </div>
           <div class="col info">
-            <p class="productName">product name</p>
+            <p class="productName">{{ProductName}}</p>
             <h5 class="arrtibute">Describtion :</h5>
-            <p class="productDes">product describtion</p>
+            <p class="productDes">{{ProductDes}}</p>
             <h5 class="arrtibute">Price :</h5>
-            <p class="productPrice"> $50</p>
+            <p class="productPrice"> {{ProductPrice + " $"}}</p>
             <h5 class="arrtibute">Add review :</h5>
             <span @click="isActive1 = !isActive1" class="fa fa-star star" v-bind:class="{ checked: isActive1}"></span>
             <span @click="isActive2 = !isActive2" class="fa fa-star star" v-bind:class="{ checked: isActive2}"></span>
@@ -40,7 +40,7 @@
             <button class="buy">Buy Now</button>
           </div>
         </div>
-        <div class="row row2">
+        <!-- <div class="row row2">
           <div class="col">
             <img 
               class="shop"
@@ -50,7 +50,7 @@
           <div class="col lets">
             Let's go shopping!
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 </template>
@@ -139,8 +139,8 @@
   color: #fff44f;
 }
 .arrtibute{
-  font-size: 15px;
-  color: rgb(148, 148, 148);
+  font-size: 17px;
+  color: rgb(189, 189, 189);
 }
 .star {
   cursor: pointer;
@@ -167,16 +167,17 @@
   color: white;
   margin-top: 10%;
 }
-.row2 {
-  width: 100%;
-  height: 60.2%;
-  margin-left: -20vw;
-  background: rgba(252, 249, 97, 0.8);
-  margin-top: -8%;
-}
+// .row2 {
+//   width: 100%;
+//   height: 60.2%;
+//   margin-left: -20vw;
+//   background: rgba(252, 249, 97, 0.8);
+//   margin-top: -8%;
+// }
 </style>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
     name: "Product",
     data: function() {
@@ -185,8 +186,20 @@ export default {
       isActive2 : false,
       isActive3 : false,
       isActive4 : false,
-      isActive5 : false
+      isActive5 : false,
     }
-    }
+    },
+    mounted() {
+    this.$store.dispatch("Products/showProduct" , this.$route.params.ProductId);
+  },
+    computed: {
+    ...mapGetters({
+      ProductName: "Products/ProductName",
+      ProductId: "Products/ProductId",
+      ProductPrice: "Products/ProductPrice",
+      ProductDes: "Products/ProductDes",
+      ProductImage: "Products/ProductImage",
+    })
+  }
 }
 </script>

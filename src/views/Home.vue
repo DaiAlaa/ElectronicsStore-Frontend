@@ -33,7 +33,13 @@
       </p>
       <input class="searchInput" placeholder="Tap to search .."/>
       <div class="row justify-content-center">
-        <CategoryCard />
+        <CategoryCard 
+          v-for="category in Categories"
+            :key="category._id"
+            :name="category.name"
+            :categoryId="category._id"
+            :categoryDes="category.description"
+        />
       </div>
     </div>
 </template>
@@ -98,7 +104,7 @@
   outline: none;
   border: none;
   padding-left: 1%;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
 }
 .search {
   margin-left: 28%;
@@ -158,10 +164,19 @@ i {
 <script>
 // @ is an alias to /src
 import CategoryCard from "@/components/CategoryCard.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "Home",
   components: {
     CategoryCard
   },
+  mounted() {
+    this.$store.dispatch("Products/showUserCategories");
+  },
+  computed: {
+    ...mapGetters({
+      Categories: "Products/Categories",
+    })
+  }
 };
 </script>

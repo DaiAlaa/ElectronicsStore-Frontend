@@ -23,11 +23,11 @@ const routes = [
         component: Home
       },
       {
-        path: "Category",
+        path: "Category/:categoryId",
         component: Category
       },
       {
-        path: "Product",
+        path: "Product/:ProductId",
         component: Product
       },
       {

@@ -19,12 +19,14 @@
           <h3 class="head5">EMPLOYEE</h3>
         </div>
       </div>
-      <div class="row record border-bottom border-secondary">
+      <div class="row record border-bottom border-secondary"
+      
+        >
         <div class="col">
-          <h4 class="head1">Dai Alaa</h4>
+          <h4 class="head1">userName</h4>
         </div>
         <div class="col">
-          <h4 class="head2">5e7648a37966e84270c96b48</h4>
+          <h4 class="head2">60aebc7d5bf7982a649f8c70</h4>
         </div>
         <div class="col">
           <button class="delete"> Delete </button>
@@ -101,7 +103,7 @@ h4 {
 .delete {
   border: none;
   background: white;
-  margin-left: 75%;
+  margin-left: 73%;
   color: red;
 }
 .adminUpgrade {
@@ -133,7 +135,25 @@ h4 {
 </style>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-    name: "ControlUsers"
+    name: "ControlUsers",
+    mounted() {
+    this.$store.dispatch("Users/showAllUsers");
+  },
+    computed: {
+    ...mapGetters({
+      AllUsers: "Users/AllUsers",
+    })
+  }
+  // v-for="user in AllUsers"
+  //           :key="user._id"
+  //           :userRole="user.role"
+  //           :userId="user._id"
+  //           :userEmail="user.email"
+  //           :userName="user.name"
+  //           :userMobile="user.mobileNumber"
+  //           :userAddress="user.address"
 }
+
 </script>
