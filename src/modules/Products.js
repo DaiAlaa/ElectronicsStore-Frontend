@@ -10,6 +10,7 @@ export default {
     ProductDes: "kkmkkkkkkkkkk",
     ProductImage: "",
     colors: [],
+    searchResults: [],
   },
   mutations: {
     setUserCategories(state, Categories) {
@@ -33,6 +34,9 @@ export default {
     setProductImage(state, imageid) {
         state.ProductImage = imageid;
     },
+    setSearchProducts(state, searchProducts) {
+      state.searchResults = searchProducts;
+  },
   },
   actions: {
     showUserCategories({ commit}) {
@@ -44,7 +48,6 @@ export default {
             Categories = [];
           }
           commit("setUserCategories", Categories);
-          console.log(response);
         })
         .catch(error => {
           let Categories = [];
@@ -83,6 +86,30 @@ export default {
             console.log(error);
           });
     },
+    searchProducts({ commit }, searchValue) {
+      axios
+        .get(
+          "http://localhost:7000/product/search?q=" +
+           searchValue +
+          "&pageNumber=1&pageSize=10"
+        )
+        .then(response => {
+          let searchProducts = response.data;
+          if (response.status != 200) {
+            searchProducts = [];
+          }
+          console.log("searchValue : ", searchValue)
+          commit("setSearchProducts", searchProducts);
+        })
+        .catch(error => {
+          let searchProducts = [];
+          commit("setSearchProducts", searchProducts);
+          console.log(error);
+        })
+        // .catch(() => {
+        //   commit("settopres", []);
+        // });
+    },
   },
   getters: {
     Categories: state => state.userCategories,
@@ -92,5 +119,6 @@ export default {
     ProductPrice: state => state.ProductPrice,
     ProductDes: state => state.ProductDes,
     ProductImage: state => state.ProductImage,
+    searchResults: state => state.searchResults,
   }
 };

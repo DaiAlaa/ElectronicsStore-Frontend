@@ -4,11 +4,16 @@ export default {
   namespaced: true,
   state: {
     AllUsers: [],
+    userRespons: 0,
+    status: "",
   },
   mutations: {
     setAllUsers(state, Users) {
       state.AllUsers = Users;
     },
+    isAdded(state, msg){
+        state.status = msg;
+    }
 
   },
   actions: {
@@ -39,8 +44,31 @@ export default {
             console.log(error);
         });
       },
-  },
+      CreateAdminEmplyee({ commit, state }, user) {
+        axios
+          .post("http://localhost:7000/Admin/create-user", {
+            email: user.email,
+            password: user.password,
+            name: user.name,
+            role: user.role,
+            creditCardNumber: user.creditCardNumber,
+            mobileNumber: user.mobileNumber,
+            address: user.address,
+          })
+          .then(response => {
+            state.userRespons = response.data;
+            commit("isAdded", "success")
+            console.log("status : ", state.status);
+          })
+          .catch(error => {
+            commit("isAdded", "failed")
+            console.log(error);
+            console.log("status : ", state.status);
+          });
+      },
+    },
   getters: {
     AllUsers: state => state.AllUsers,
+    Status: state => state.status,
   }
 };

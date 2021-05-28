@@ -7,42 +7,37 @@
           <h3 class="head1">USER NAME</h3>
         </div>
         <div class="col">
-          <h3 class="head2">ID</h3>
+          <h3 class="head2">EMAIL</h3>
         </div>
         <div class="col">
-          <h3 class="head3">DELETE USER</h3>
+          <h3 class="head3">ID</h3>
         </div>
         <div class="col">
-          <h3 class="head4">ADMIN</h3>
-        </div>
-        <div class="col">
-          <h3 class="head5">EMPLOYEE</h3>
+          <h3 class="head4">DELETE USER</h3>
         </div>
       </div>
       <div class="row record border-bottom border-secondary"
-      
+        v-for="user in AllUsers"
+            :key="user._id"
+            :userRole="user.role"
+            :userId="user._id"
+            :userEmail="user.email"
+            :userName="user.name"
+            :userMobile="user.mobileNumber"
+            :userAddress="user.address"
         >
         <div class="col">
-          <h4 class="head1">userName</h4>
+          <h4 class="head1">{{userName}}</h4>
         </div>
         <div class="col">
-          <h4 class="head2">60aebc7d5bf7982a649f8c70</h4>
+          <h4 class="head2">{{userEmail}}</h4>
         </div>
         <div class="col">
-          <button class="delete"> Delete </button>
+          <h4 class="head3">{{userId}}</h4>
         </div>
         <div class="col">
-          <button class="adminUpgrade"> Upgrade </button>
+          <button class="delete" @click="deleteUser(userId)"> Delete </button>
         </div>
-        <!-- <div class="col">
-          <h5 class="Upgraded1"> Upgraded </h5>
-        </div> -->
-        <div class="col">
-          <button class="empUpgrade"> Upgrade </button>
-        </div>
-        <!-- <div class="col">
-          <h5 class="Upgraded2"> Upgraded </h5>
-        </div> -->
       </div>
   </div>
 </template>
@@ -78,16 +73,11 @@ h3 {
 }
 .head3 {
   position: absolute;
-  margin-left: 30%;
-  width: 90%;
+  margin-left: 20%;
 }
 .head4{
   position: absolute;
-  margin-left: 55%;
-}
-.head5 {
-  position: absolute;
-  margin-left: 26%;
+  margin-left: 30%;
 }
 .record {
   width: 80%;
@@ -103,34 +93,8 @@ h4 {
 .delete {
   border: none;
   background: white;
-  margin-left: 73%;
+  margin-left: 25%;
   color: red;
-}
-.adminUpgrade {
-  border: none;
-  background: white;
-  margin-left: 63%;
-  color: #1b2588;
-  font-weight: bold;
-}
-.empUpgrade {
-  border: none;
-  background: white;
-  margin-left: 29%;
-  color: #1b2588;
-  font-weight: bold;
-}
-.Upgraded1 {
-  font-size: 16px;
-  font-weight: bold;
-  margin-left: 63%;
-  color: rgb(154, 218, 59);
-}
-.Upgraded2 {
-  font-size: 16px;
-  font-weight: bold;
-  margin-left: 29%;
-  color: rgb(154, 218, 59);
 }
 </style>
 
@@ -145,15 +109,11 @@ export default {
     ...mapGetters({
       AllUsers: "Users/AllUsers",
     })
-  }
-  // v-for="user in AllUsers"
-  //           :key="user._id"
-  //           :userRole="user.role"
-  //           :userId="user._id"
-  //           :userEmail="user.email"
-  //           :userName="user.name"
-  //           :userMobile="user.mobileNumber"
-  //           :userAddress="user.address"
+  },
+   methods: {
+    deleteUser(userId) {
+      this.$store.dispatch("Users/DeleteUser", userId);
+    },
+   }
 }
-
 </script>

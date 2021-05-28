@@ -28,11 +28,15 @@
           <i class="fa fa-user"></i>
         </button>
       </router-link>
-      <p class="search">
+      <!-- <p class="search">
         What's in your mind?
-      </p>
-      <input class="searchInput" placeholder="Tap to search .."/>
-      <div class="row justify-content-center">
+      </p> -->
+      <button class="SearchButton" @click="search()">Search</button>
+      <input class="searchInput" placeholder="Tap to search .."
+      v-model="SearchValue"
+      autocomplete="off"
+      />
+      <div class="row justify-content-center"  v-if="SearchValue == ''">
         <CategoryCard 
           v-for="category in Categories"
             :key="category._id"
@@ -41,6 +45,19 @@
             :categoryDes="category.description"
         />
       </div>
+      <div class="row" v-if="SearchValue != '' && searchResults.length != 0">
+        <ProductCard 
+        v-for="Product in searchResults"
+            :key="Product._id"
+            :name="Product.name"
+            :ProductId="Product._id"
+            :ProductPrice="Product.price"
+            :imageId="Product.imageId"
+        />
+      </div>
+      <p class="notFound"  v-if="SearchValue != '' && searchResults.length == 0">
+        Not Found
+      </p>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -116,6 +133,22 @@
   position:absolute;
   font-family: cursive;
 }
+.SearchButton {
+  border: none;
+  border-radius: 20px;
+  width: 6%;
+  height: 5.5%;
+  left: 32%;
+  margin-top: 13%;
+  position: absolute;
+  background-color: #fff44f;
+  color: black;
+  text-decoration: none;
+  outline: none;
+}
+.SearchButton:hover {
+  background-color: #ffee07;
+}
 .add {
   border: none;
   border-radius: 20px;
@@ -159,16 +192,36 @@ i {
     width: 100%;
     margin-bottom: 120px;
 }
+.notFound {
+  text-align: center;
+  font-size: 30px;
+  color: gray;
+  margin-top: 4%;
+}
 </style>
 
 <script>
 // @ is an alias to /src
 import CategoryCard from "@/components/CategoryCard.vue";
+import ProductCard from "@/components/ProductCard.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "Home",
+  data: function() {
+    return {
+      SearchValue:"",
+    };
+  },
   components: {
-    CategoryCard
+    CategoryCard,
+    ProductCard
+  },
+  methods: {
+    search() {
+      if (this.SearchValue != ""){
+        this.$store.dispatch("Products/searchProducts", this.SearchValue);
+      }
+    }
   },
   mounted() {
     this.$store.dispatch("Products/showUserCategories");
@@ -176,6 +229,7 @@ export default {
   computed: {
     ...mapGetters({
       Categories: "Products/Categories",
+      searchResults: "Products/searchResults",
     })
   }
 };

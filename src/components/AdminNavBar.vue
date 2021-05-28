@@ -10,6 +10,11 @@
           Statistics
         </button>
       </router-link>
+      <router-link to="/AdminPanel/AddNewAdmin">
+        <button class="newAdmin" v-bind:class="{ newAdmin2: route3}">
+          Add new admin
+        </button>
+      </router-link>
     </div>
 </template>
 
@@ -19,7 +24,7 @@
   border-radius: 20px;
   width: 10%;
   height: 6%;
-  margin-left: -7%;
+  margin-left: -12%;
   margin-top: 2%;
   position: absolute;
   background-color: #161516;
@@ -33,7 +38,7 @@
   border-radius: 20px;
   width: 10%;
   height: 6%;
-  margin-left: -7%;
+  margin-left: -12%;
   margin-top: 2%;
   position: absolute;
   background-color: white;
@@ -48,7 +53,7 @@
   width: 7%;
   height: 6%;
   margin-top: 2%;
-  margin-left: 4%;
+  margin-left: 0%;
   position: absolute;
   background-color: #161516;
   color: white;
@@ -62,7 +67,7 @@
   width: 7%;
   height: 6%;
   margin-top: 2%;
-  margin-left: 4%;
+  margin-left: 0%;
   position: absolute;
   background-color: white;
   color: #161516;
@@ -70,7 +75,35 @@
   outline: none;
   font-weight: bold;
 }
-.Statistics:focus, .users:focus {
+.newAdmin {
+  border: none;
+  border-radius: 20px;
+  width: 11%;
+  height: 6%;
+  margin-top: 2%;
+  margin-left: 8%;
+  position: absolute;
+  background-color: #161516;
+  color: white;
+  text-decoration: none;
+  outline: none;
+  font-weight: bold;
+}
+.newAdmin2 {
+  border: none;
+  border-radius: 20px;
+  width: 11%;
+  height: 6%;
+  margin-top: 2%;
+  margin-left: 8%;
+  position: absolute;
+  background-color: white;
+  color: #161516;
+  text-decoration: none;
+  outline: none;
+  font-weight: bold;
+}
+.Statistics:focus, .users:focus, .newAdmin:focus {
   background-color: white;
   color: #161516;  
 }
@@ -82,6 +115,7 @@ export default {
     return {
       route1: false,
       route2: false,
+      route3: false,
     };
   },
   name: "AdminNavBar",
@@ -100,6 +134,12 @@ export default {
       else {
         this.route2 = false;
       }
+      if (this.$router.currentRoute.path == "/AdminPanel/AddNewAdmin"){
+        this.route3 = true;
+      }
+      else {
+        this.route3 = false;
+      }
     }
   },
   mounted() {
@@ -115,6 +155,12 @@ export default {
       }
       else {
         this.route2 = false;
+      }
+      if (this.$router.currentRoute.path == "/AdminPanel/AddNewAdmin"){
+        this.route3 = true;
+      }
+      else {
+        this.route3 = false;
       }
   }
 }
