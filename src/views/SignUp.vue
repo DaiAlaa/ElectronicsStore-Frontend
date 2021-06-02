@@ -420,8 +420,7 @@ h2 {
 import { mapGetters } from "vuex";
 export default {
   name: "SignUp",
-  components: {
-  },
+  components: {},
   data: function () {
     return {
       //User's data that will be passed from the v-model
@@ -512,7 +511,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isLoggedIn: "Authorization/GetStatus"
+      isLoggedIn: "Authorization/GetStatus",
     }),
     req_email: function () {
       if (this.trigger_validation) {
@@ -700,7 +699,7 @@ export default {
       if (this.trigger_validation) {
         if (
           !isNaN(this.year) &&
-          Number(this.year) >= d.getFullYear()-5 &&
+          Number(this.year) >= d.getFullYear() - 5 &&
           Number(this.year) < d.getFullYear()
         ) {
           this.cannotSubmit();

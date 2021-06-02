@@ -201,11 +201,10 @@ export default {
     canSubmit() {
       this.can_submit = this.can_submit && true;
     },
-
   },
   computed: {
     ...mapGetters({
-      isLoggedIn: "Authorization/GetStatus"
+      isLoggedIn: "Authorization/GetStatus",
     }),
     req_email: function () {
       if (this.trigger_validation) {

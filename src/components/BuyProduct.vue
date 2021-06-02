@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <!-- <transition name="fade" appear>
       <div
         class="modal-overlay"
@@ -8,7 +8,7 @@
       ></div>
     </transition> -->
     <transition name="slide" appear>
-       <div class="modal" v-if="showModal">
+      <div class="modal" v-if="showModal">
         <form>
           <p>Full Name</p>
           <input
@@ -39,18 +39,14 @@
           />
           <br />
           <p>City</p>
-          <select
-            v-model="City"
-            class="City_select"
-            testid="city input"
-          >
+          <select v-model="City" class="City_select" testid="city input">
             <option
               v-for="city in cities"
               :key="city.value"
               :value="city.value"
               :disabled="city.disabled"
             >
-              {{city.text }}
+              {{ city.text }}
             </option>
           </select>
           <br />
@@ -84,7 +80,7 @@
             id="Floor"
           />
           <br />
-          <p>Creidt Card </p>
+          <p>Creidt Card</p>
           <input
             class="input_field"
             type="text"
@@ -96,7 +92,7 @@
           <br />
 
           <button
-            @click.prevent="buyProduct(),changeModalState()"
+            @click.prevent="buyProduct(), changeModalState()"
             class="costum-btn justify-content-center"
             id="buy-btn"
             type="submit"
@@ -104,12 +100,9 @@
           >
             Buy this product
           </button>
-          <button
-              class="customButton"
-              @click="changeModalState()"
-            >
-              cancel
-            </button>
+          <button class="customButton" @click="changeModalState()">
+            cancel
+          </button>
         </form>
       </div>
     </transition>
@@ -123,7 +116,8 @@
   overflow: hidden;
 }
 
-html,body {
+html,
+body {
   font-family: "montserrat", sans-serif;
   overflow: hidden;
   padding: 0;
@@ -131,10 +125,10 @@ html,body {
 }
 
 div {
-  position:absolute;
+  position: absolute;
   display: block;
   // right :10%;
-  left:25%;
+  left: 25%;
   justify-content: center;
   align-items: center;
   width: 50vw;
@@ -161,7 +155,7 @@ div {
  }*/
 
 .modal {
-  position:relative;
+  position: relative;
   z-index: 20;
   top: 0;
   left: 0;
@@ -171,31 +165,31 @@ div {
   transition: opacity 0.3s ease;
   overflow-y: scroll;
 }
-p{
-    position:relative;
-    display:flex;
-    font-weight: bold;
-    color:white;
-    margin-left: 10%;
-    margin-top: 2%;
-    margin-bottom: 0%;
-  }
-  input {
-    position:relative;
-    display:inline-block;
-    width: 80%;
-    height: 2.5em;
-    align-items: center;
-    background-color: transparent;
-    color: #fff;
-    border-color:whitesmoke;
-    font-size: 1em;
-    line-height: 10vh;
-    outline: none;
-    font-weight: bold;
-    margin-top: 2vh;
-    z-index: 20;
-  }
+p {
+  position: relative;
+  display: flex;
+  font-weight: bold;
+  color: white;
+  margin-left: 10%;
+  margin-top: 2%;
+  margin-bottom: 0%;
+}
+input {
+  position: relative;
+  display: inline-block;
+  width: 80%;
+  height: 2.5em;
+  align-items: center;
+  background-color: transparent;
+  color: #fff;
+  border-color: whitesmoke;
+  font-size: 1em;
+  line-height: 10vh;
+  outline: none;
+  font-weight: bold;
+  margin-top: 2vh;
+  z-index: 20;
+}
 select {
   border-radius: 2px;
   border: 1px solid #dfe0e6;
@@ -211,9 +205,9 @@ select {
   background-color: rgba(0, 0, 0, 0.8);
 }
 button {
-  position:relative;
+  position: relative;
   display: inline-flex;
-  align-items:baseline; 
+  align-items: baseline;
   margin: 2em;
   font-size: 1em;
   font-weight: 700;
@@ -257,9 +251,6 @@ button {
 //     font-size: 10px;
 //   }
 // }
-
-
-
 
 .highlight {
   color: #0f1549;
@@ -305,7 +296,6 @@ button:hover {
   }
 }
 
-
 h2 {
   margin-top: 5%;
 }
@@ -315,7 +305,7 @@ export default {
   name: "BuyProduct",
   data: function () {
     return {
-      //   playlistname: "" 
+      //   playlistname: ""
       showModal: true,
       city: "0",
       cities: [
