@@ -17,7 +17,7 @@
           <i class="fa fa-plus"></i>
         </button>
       </router-link>
-      <router-link to="/OrdersDetails">
+      <router-link to="/OrdersDetails"> 
         <button class="orders"> 
           Orders' details
         </button>
@@ -55,7 +55,7 @@
             :imageId="Product.imageId"
         />
       </div>
-      <p class="notFound"  v-if="SearchValue != '' && searchResults.length == 0">
+      <p class="notFound"  v-if="SearchValue != '' && this.notFound">
         Not Found
       </p>
     </div>
@@ -210,6 +210,7 @@ export default {
   data: function() {
     return {
       SearchValue:"",
+      notFound: false,
     };
   },
   components: {
@@ -220,6 +221,10 @@ export default {
     search() {
       if (this.SearchValue != ""){
         this.$store.dispatch("Products/searchProducts", this.SearchValue);
+        if (this.searchResults.length == 0)
+        {
+          this.notFound == true;
+        }
       }
     }
   },
