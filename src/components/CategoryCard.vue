@@ -1,27 +1,32 @@
 <template>
-  <div class="card rounded col-lg-30%">
-    <img
-      class="card-img-top mx-auto d-block"
-      src="../assets/wall1.jpg"
-      alt="Card image"
-      id="cardimg"
-    />
-    <div class="card-body" id="cardbody">
-      <h4 class="card-title" id="cardtitle">Cameras</h4>
-      <p class="card-text">Shop now</p>
-      <router-link
-        to="Category"
-        class="stretched-link"
-        id="carglink"
-      ></router-link>
+    <div class="card rounded col-lg-30%">
+        <img
+        class="card-img-top mx-auto d-block"
+        src="../assets/wall1.jpg"
+        alt="Card image"
+        id="cardimg"
+        />
+        <div class="card-body" id="cardbody">
+            <h4 class="card-title" id="cardtitle">
+                {{ name }}
+            </h4>
+            <hr>
+            <p class="card-text">
+                {{categoryDes}}
+            </p>
+            <router-link
+                :to="{ path: '/Category/' + categoryId }"
+                class="stretched-link"
+                id="carglink"
+            ></router-link>
+        </div>
     </div>
-  </div>
 </template>
 <style scoped>
 .card {
   background: #313030;
   width: 24%;
-  height: 52%;
+  height: 54%;
   margin-left: 17px;
   margin-top: 17px;
   margin-bottom: 17px;
@@ -36,13 +41,13 @@ h4 {
   font-weight: bold;
   color: white;
   margin-bottom: 4px;
-  margin-left: -66%;
+  /* margin-left: -60%; */
+  position: absolute;
 }
 p {
   font-size: 15px;
   color: #fff44f;
   position: absolute;
-  margin-left: 2%;
 }
 </style>
 <script>
@@ -53,5 +58,22 @@ p {
 
 export default {
   name: "CategoryCard",
+  props: {
+    name: {
+      type: String
+    },
+    categoryDes: {
+      type: String
+    },
+    categoryId: {
+      type: String
+    },
+  },
+  // computed: {
+  //   ...mapGetters({
+  //     Username: "Authorization/Username",
+  //     likedplaylist: "Playlist/likeplaylist"
+  //   })
+  // },
 };
 </script>

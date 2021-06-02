@@ -9,27 +9,54 @@
     <!-- <button class="userName">
         user name
       </button> -->
-    <!-- <button class="add"> 
-        Add Product
-        <i class="fa fa-plus"></i>
-      </button>
-      <router-link to="/OrdersDetails">
+      <router-link to="/AddProduct">
+        <button class="add"> 
+          Add Product
+          <i class="fa fa-plus"></i>
+        </button>
+      </router-link>
+      <router-link to="/OrdersDetails"> 
         <button class="orders"> 
           Orders' details
         </button>
-      </router-link> -->
-    <router-link to="/AdminPanel/ControlUsers">
-      <button class="add">
-        Admin Panel
-        <i class="fa fa-user"></i>
-      </button>
-    </router-link>
-    <p class="search">What's in your mind?</p>
-    <input class="searchInput" placeholder="Tap to search .." />
-    <div class="row justify-content-center">
-      <CategoryCard />
+      </router-link>
+      <router-link to="/AdminPanel/ControlUsers">
+        <button class="Admin">
+          Admin Panel
+          <i class="fa fa-user"></i>
+        </button>
+      </router-link>
+      <!-- <p class="search">
+        What's in your mind?
+      </p> -->
+      <button class="SearchButton" @click="search()">Search</button>
+      <input class="searchInput" placeholder="Tap to search .."
+      v-model="SearchValue"
+      autocomplete="off"
+      />
+      <div class="row justify-content-center"  v-if="SearchValue == ''">
+        <CategoryCard 
+          v-for="category in Categories"
+            :key="category._id"
+            :name="category.name"
+            :categoryId="category._id"
+            :categoryDes="category.description"
+        />
+      </div>
+      <div class="row" v-if="SearchValue != '' && searchResults.length != 0">
+        <ProductCard 
+        v-for="Product in searchResults"
+            :key="Product._id"
+            :name="Product.name"
+            :ProductId="Product._id"
+            :ProductPrice="Product.price"
+            :imageId="Product.imageId"
+        />
+      </div>
+      <p class="notFound"  v-if="SearchValue != '' && this.notFound">
+        Not Found
+      </p>
     </div>
-  </div>
 </template>
 <style lang="scss" scoped>
 .homePage {
@@ -92,7 +119,7 @@
   outline: none;
   border: none;
   padding-left: 1%;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
 }
 .search {
   margin-left: 28%;
@@ -103,6 +130,22 @@
   color: white;
   position: absolute;
   font-family: cursive;
+}
+.SearchButton {
+  border: none;
+  border-radius: 20px;
+  width: 6%;
+  height: 5.5%;
+  left: 32%;
+  margin-top: 13%;
+  position: absolute;
+  background-color: #fff44f;
+  color: black;
+  text-decoration: none;
+  outline: none;
+}
+.SearchButton:hover {
+  background-color: #ffee07;
 }
 .add {
   border: none;
@@ -126,6 +169,17 @@
   background-color: #fff44f;
   color: #161516;
 }
+.Admin {
+  border: none;
+  border-radius: 20px;
+  width: 11%;
+  height: 6%;
+  position:absolute;
+  margin-top: 17%;
+  margin-left: 49%;
+  background-color: #fff44f;
+  color: #161516;
+}
 i {
   font-size: 20px;
   color: #161516;
@@ -136,15 +190,50 @@ i {
   width: 100%;
   margin-bottom: 120px;
 }
+.notFound {
+  text-align: center;
+  font-size: 30px;
+  color: gray;
+  margin-top: 4%;
+}
 </style>
 
 <script>
 // @ is an alias to /src
 import CategoryCard from "@/components/CategoryCard.vue";
+import ProductCard from "@/components/ProductCard.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "Home",
+  data: function() {
+    return {
+      SearchValue:"",
+      notFound: false,
+    };
+  },
   components: {
     CategoryCard,
+    ProductCard
   },
+  methods: {
+    search() {
+      if (this.SearchValue != ""){
+        this.$store.dispatch("Products/searchProducts", this.SearchValue);
+        if (this.searchResults.length == 0)
+        {
+          this.notFound == true;
+        }
+      }
+    }
+  },
+  mounted() {
+    this.$store.dispatch("Products/showUserCategories");
+  },
+  computed: {
+    ...mapGetters({
+      Categories: "Products/Categories",
+      searchResults: "Products/searchResults",
+    })
+  }
 };
 </script>

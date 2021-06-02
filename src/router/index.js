@@ -10,6 +10,8 @@ import ControlUsers from "../views/ControlUsers.vue";
 import Login from "../views/Login.vue";
 import AddProduct from "../views/AddProduct.vue";
 import Statistics from "../views/Statistics.vue";
+import OrdersDetails from "../views/OrdersDetails.vue";
+import AddNewAdmin from "../views/AddNewAdmin.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -22,11 +24,11 @@ const routes = [
         component: Home
       },
       {
-        path: "Category",
+        path: "Category/:categoryId",
         component: Category
       },
       {
-        path: "Product",
+        path: "Product/:ProductId",
         component: Product
       },
       {
@@ -41,7 +43,15 @@ const routes = [
             path: "Statistics",
             component: Statistics
           },
+          {
+            path: "AddNewAdmin",
+            component: AddNewAdmin
+          },
         ]
+      },
+      {
+        path: "OrdersDetails",
+        component: OrdersDetails,
       },
       {
         path: "/AddProduct",

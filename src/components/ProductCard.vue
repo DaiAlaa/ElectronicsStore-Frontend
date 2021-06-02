@@ -8,16 +8,12 @@
         />
         <div class="card-body" id="cardbody">
         <h4 class="card-title" id="cardtitle">
-            Cameras
+            {{ name }}
         </h4>
-        <p class="card-text">
-            describtion describtion 
-        </p>
-        <hr>
         <h5>
-            price
+            {{ ProductPrice  + " $"}}
         </h5>
-        <router-link to="/Product">
+        <router-link :to="{ path: '/Product/' + ProductId }">
           <button class="viewProduct">
             view
           </button>
@@ -34,7 +30,7 @@
 .card {
   background: #313030;
   width: 18.5%;
-  height: 49%;
+  height: 46%;
   margin-left: 17px;
   margin-top: 17px;
   margin-bottom: 17px;
@@ -42,14 +38,14 @@
 }
 #cardimg {
   width: 88%;
-  height: 57%;
+  height: 59%;
   margin-top: 18px;
 }
 h4 {
   font-size: 20px;
   font-weight: bold;
   color: white;
-  margin-bottom: 4px;
+  margin-bottom: 15px;
   /* margin-left: -62%; */
   text-align: left;
 }
@@ -74,7 +70,7 @@ h5 {
   border-radius: 20px;
   margin-left: 66%;
   width: 36%;
-  height: 40%;
+  height: 42%;
 }
 </style>
 <script>
@@ -85,6 +81,20 @@ h5 {
 
 export default {
   name: "CategoryCard",
+  props: {
+    name: {
+      type: String
+    },
+    ProductId: {
+      type: String
+    },
+    ProductPrice: {
+      type: String
+    },
+    imageId: {
+     type: String 
+    }
+  },
   filters: {
     shorten: function(value) {
       if (value && value.length > 35) return value.substring(0, 35) + " ...";

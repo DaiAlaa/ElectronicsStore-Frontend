@@ -7,9 +7,12 @@ import router from "./router";
 import store from "./store";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import axios from "axios";
+import axios from "axios";
 
 Vue.config.productionTip = false;
+
+axios.defaults.baseURL = "http://localhost:7000/";
+Vue.prototype.$url = "http://localhost:7000/";
 
 new Vue({
   router,
