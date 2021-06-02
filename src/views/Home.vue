@@ -1,17 +1,15 @@
 <template>
-    <div class="homePage">
-      <router-link to="/SignUp">
-        <button class="sign">
-          SIGN UP
-        </button>
-      </router-link>
-      <router-link to="/Login">
-        <button class="log">LOG IN</button>
-      </router-link>
-      <!-- <button class="userName">
+  <div class="homePage">
+    <router-link to="/SignUp">
+      <button class="sign">SIGN UP</button>
+    </router-link>
+    <router-link to="/Login">
+      <button class="log">LOG IN</button>
+    </router-link>
+    <!-- <button class="userName">
         user name
       </button> -->
-      <!-- <button class="add"> 
+    <!-- <button class="add"> 
         Add Product
         <i class="fa fa-plus"></i>
       </button>
@@ -20,24 +18,22 @@
           Orders' details
         </button>
       </router-link> -->
-      <router-link to="/AdminPanel/ControlUsers">
-        <button class="add">
-          Admin Panel
-          <i class="fa fa-user"></i>
-        </button>
-      </router-link>
-      <p class="search">
-        What's in your mind?
-      </p>
-      <input class="searchInput" placeholder="Tap to search .."/>
-      <div class="row justify-content-center">
-        <CategoryCard />
-      </div>
+    <router-link to="/AdminPanel/ControlUsers">
+      <button class="add">
+        Admin Panel
+        <i class="fa fa-user"></i>
+      </button>
+    </router-link>
+    <p class="search">What's in your mind?</p>
+    <input class="searchInput" placeholder="Tap to search .." />
+    <div class="row justify-content-center">
+      <CategoryCard />
     </div>
+  </div>
 </template>
 <style lang="scss" scoped>
 .homePage {
-    height: 100%;
+  height: 100%;
 }
 .sign {
   border: none;
@@ -105,7 +101,7 @@
   height: 5%;
   font-size: 20px;
   color: white;
-  position:absolute;
+  position: absolute;
   font-family: cursive;
 }
 .add {
@@ -113,7 +109,7 @@
   border-radius: 20px;
   width: 11%;
   height: 6%;
-  position:absolute;
+  position: absolute;
   margin-top: 9%;
   margin-left: 49%;
   background-color: #fff44f;
@@ -124,7 +120,7 @@
   border-radius: 20px;
   width: 11%;
   height: 6%;
-  position:absolute;
+  position: absolute;
   margin-top: 13%;
   margin-left: 49%;
   background-color: #fff44f;
@@ -135,10 +131,10 @@ i {
   color: #161516;
   margin-left: 4%;
 }
-.row{
-    height: 100%;
-    width: 100%;
-    margin-bottom: 120px;
+.row {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 120px;
 }
 </style>
 
@@ -148,7 +144,7 @@ import CategoryCard from "@/components/CategoryCard.vue";
 export default {
   name: "Home",
   components: {
-    CategoryCard
+    CategoryCard,
   },
 };
 </script>

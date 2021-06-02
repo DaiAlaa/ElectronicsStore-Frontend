@@ -5,7 +5,7 @@
         <h2>Add your product's details</h2>
 
         <form>
-            <p>product name</p>
+          <p>product name</p>
           <input
             class="input_field"
             type="text"
@@ -15,7 +15,7 @@
             id="name"
           />
           <br />
-        <p>product price</p>
+          <p>product price</p>
           <input
             class="input_field"
             type="number"
@@ -47,24 +47,23 @@
           />
           <br />
           <p>product's photo</p>
-            <input
-             type="file"
-              accept="image/*"
-              ref="inputfile"
-              @change="OnPhotoUpload"
-              style="display:none"
-              testid="photo input"
-              id="photo"
-              
-            />
-            <button
-              class="uploadfile"
-              @click="$refs.inputfile.click()"
-              v-if="choosebutton == false"
-            >
-              Add product's photo
-            </button>
-            <!-- <button class="uploadbutton" @click="UploadPhoto()">
+          <input
+            type="file"
+            accept="image/*"
+            ref="inputfile"
+            @change="OnPhotoUpload"
+            style="display: none"
+            testid="photo input"
+            id="photo"
+          />
+          <button
+            class="uploadfile"
+            @click="$refs.inputfile.click()"
+            v-if="choosebutton == false"
+          >
+            Add product's photo
+          </button>
+          <!-- <button class="uploadbutton" @click="UploadPhoto()">
               Upload
             </button> -->
 
@@ -78,7 +77,6 @@
           >
             Add product
           </button>
-
         </form>
       </div>
     </div>
@@ -101,7 +99,7 @@ body {
   // position: absolute;
   display: block;
 }
-h2{
+h2 {
   margin-top: 5%;
 }
 form {
@@ -157,18 +155,15 @@ input {
 #product-btn:hover {
   background-color: #0f1549;
 }
-
 </style>
 <script>
 export default {
-     name: "AddProduct",
-     data: function(){
-       return{
-         choosebutton: false
-       };
-     },
-    setup() {
-        
-    },
-}
+  name: "AddProduct",
+  data: function () {
+    return {
+      choosebutton: false,
+    };
+  },
+  setup() {},
+};
 </script>

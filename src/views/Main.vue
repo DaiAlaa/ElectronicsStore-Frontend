@@ -1,11 +1,8 @@
 <template>
-    <div class="home">
-      <img class="logo"
-        src="../assets/GLogo.jpeg"
-        alt="logo"
-      />
-      <router-view class="child"></router-view>
-    </div>
+  <div class="home">
+    <img class="logo" src="../assets/GLogo.jpeg" alt="logo" />
+    <router-view class="child"></router-view>
+  </div>
 </template>
 <style lang="scss" scoped>
 .home {
@@ -19,16 +16,16 @@
   overflow-y: scroll;
 }
 .logo {
-  width: 16%;
+  width: 20%;
   height: 20%;
   position: absolute;
-  margin-left: -47%;
+  margin-left: -49%;
   border-radius: 50%;
-  margin-top: 2%;
+  // margin-top: 2%;
 }
 </style>
 <script>
 export default {
-   name: "Main"
-}
+  name: "Main",
+};
 </script>

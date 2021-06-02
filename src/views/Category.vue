@@ -1,19 +1,15 @@
 <template>
-    <div class="categoryPage">
-      <router-link to="/SignUp">
-        <button class="sign">
-          SIGN UP
-        </button>
-      </router-link>
-      <router-link to="/">
-        <button class="log">
-          LOG IN
-        </button>
-      </router-link>
-      <!-- <button class="userName">
+  <div class="categoryPage">
+    <router-link to="/SignUp">
+      <button class="sign">SIGN UP</button>
+    </router-link>
+    <router-link to="/">
+      <button class="log">LOG IN</button>
+    </router-link>
+    <!-- <button class="userName">
         user name
       </button> -->
-      <!-- <button class="add"> 
+    <!-- <button class="add"> 
         Add Product
         <i class="fa fa-plus"></i>
       </button>
@@ -22,25 +18,23 @@
           Orders' details
         </button>
       </router-link> -->
-      <router-link to="/AdminPanel/ControlUsers">
-        <button class="add">
-          Admin Panel
-          <i class="fa fa-user"></i>
-        </button>
-      </router-link>
-      <p class="search">
-        What's in your mind?
-      </p>
-      <input class="searchInput" placeholder="Tap to search .."/>
-      <h3> Cameras : </h3>
-      <div class="row">
-        <ProductCard />
-      </div>
+    <router-link to="/AdminPanel/ControlUsers">
+      <button class="add">
+        Admin Panel
+        <i class="fa fa-user"></i>
+      </button>
+    </router-link>
+    <p class="search">What's in your mind?</p>
+    <input class="searchInput" placeholder="Tap to search .." />
+    <h3>Cameras :</h3>
+    <div class="row">
+      <ProductCard />
     </div>
+  </div>
 </template>
 <style lang="scss" scoped>
 .categoryPage {
-    height: 100%;
+  height: 100%;
 }
 .sign {
   border: none;
@@ -70,7 +64,8 @@
   outline: none;
   font-weight: bold;
 }
-.sign:hover, .log:hover {
+.sign:hover,
+.log:hover {
   height: 6.5%;
 }
 .userName {
@@ -107,7 +102,7 @@
   height: 5%;
   font-size: 20px;
   color: white;
-  position:absolute;
+  position: absolute;
   font-family: cursive;
 }
 .add {
@@ -115,7 +110,7 @@
   border-radius: 20px;
   width: 11%;
   height: 6%;
-  position:absolute;
+  position: absolute;
   margin-top: 9%;
   margin-left: 49%;
   background-color: #fff44f;
@@ -126,7 +121,7 @@
   border-radius: 20px;
   width: 11%;
   height: 6%;
-  position:absolute;
+  position: absolute;
   margin-top: 13%;
   margin-left: 49%;
   background-color: #fff44f;
@@ -143,16 +138,16 @@ h3 {
   font-weight: bold;
   text-align: left;
   margin-left: 3%;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   margin-bottom: 3%;
   margin-top: 4%;
 }
-.row{
-    height: 100%;
-    width: 100%;
-    margin-bottom: 120px;
-    padding-left: 4%;
-    /* padding-right: 2%; */
+.row {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 120px;
+  padding-left: 4%;
+  /* padding-right: 2%; */
 }
 </style>
 
@@ -162,7 +157,7 @@ import ProductCard from "@/components/ProductCard.vue";
 export default {
   name: "Category",
   components: {
-    ProductCard
+    ProductCard,
   },
 };
 </script>

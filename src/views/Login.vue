@@ -1,10 +1,8 @@
 <template>
-
   <div class="conatiner login-form encor-ligh-theme px-0">
     <buy-product></buy-product>
     <div class="row justify-content-center m-0">
       <div class="col-xl-4 col-lg-4 col-md-5 col-sm-8" align="center">
-        
         <form>
           <h2>Login with your Email</h2>
           <input
@@ -101,8 +99,8 @@ input {
   margin-bottom: 16px;
   // background-color: transparent;
 }
-h2{
-  margin-top:5%;
+h2 {
+  margin-top: 5%;
 }
 #email {
   margin-top: 15%;
@@ -164,31 +162,24 @@ form {
 }
 </style>
 <script>
-import BuyProduct from "@/components/BuyProduct.vue";
-// import { mapGetters } from "vuex";
+// import BuyProduct from "@/components/BuyProduct.vue";
+import { mapGetters } from "vuex";
 export default {
-   name: "Login",
+  name: "Login",
   components: {
-    BuyProduct
+    // BuyProduct,
   },
-   data: function() {
+  data: function () {
     return {
       //User's data that will be passed from the v-model
       email: "",
       password: "",
       //required for validation
       trigger_validation: false,
-      can_submit: true
+      can_submit: true,
     };
-
   },
-   methods: {
-    /**
-     * login function to open user's account
-     * @public This is a public method
-     * @param {String} email email which the spotify account is created with
-     * @param {String} password user's account password
-     */
+  methods: {
     login() {
       this.trigger_validation = true;
       this.can_submit = true;
@@ -198,36 +189,25 @@ export default {
         if (this.can_submit) {
           let user = {
             email: this.email,
-            password: this.password
+            password: this.password,
           };
           this.$store.dispatch("Authorization/login", user);
         }
       }, 200);
     },
-    /**
-     * this function used to determine the state of account if there is any error with the login operation or the account is not existed
-     * @public This is a public method
-     */
     cannotSubmit() {
       this.can_submit = false;
     },
-    /**
-     * this function used to determine the state of account if it is existed and can let the user in
-     * @public This is a public method
-     */
     canSubmit() {
       this.can_submit = this.can_submit && true;
     },
-    /**
-     * this function used to login with facebook account
-     * @public This is a public method
-     */
+
   },
   computed: {
-    // ...mapGetters({
-    //   isLoggedIn: "Authorization/GetStatus"
-    // }),
-    req_email: function() {
+    ...mapGetters({
+      isLoggedIn: "Authorization/GetStatus"
+    }),
+    req_email: function () {
       if (this.trigger_validation) {
         if (this.email == "") {
           this.cannotSubmit();
@@ -240,7 +220,7 @@ export default {
         return false;
       }
     },
-    req_password: function() {
+    req_password: function () {
       if (this.trigger_validation) {
         if (this.password == "") {
           this.cannotSubmit();
@@ -252,7 +232,7 @@ export default {
       } else {
         return false;
       }
-    }
-  }
+    },
+  },
 };
 </script>

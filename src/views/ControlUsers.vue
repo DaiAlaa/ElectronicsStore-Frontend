@@ -1,29 +1,29 @@
 <template>
   <div>
     <h1>Control Users:</h1>
-      <div class="row mainRow justify-content-center border-bottom">
-        t
-        <div class="col">
-          <h3 class="head1">USER NAME</h3>
-        </div>
-        <div class="col">
-          <h3 class="head2">ID</h3>
-        </div>
-        <div class="col">
-          <h3 class="head3">DELETE USER</h3>
-        </div>
+    <div class="row mainRow justify-content-center border-bottom">
+      t
+      <div class="col">
+        <h3 class="head1">USER NAME</h3>
       </div>
-      <div class="row record border-bottom border-secondary">
-        <div class="col">
-          <h4 class="head1">Dai Alaa</h4>
-        </div>
-        <div class="col">
-          <h4 class="head2">5e7648a37966e84270c96b48</h4>
-        </div>
-        <div class="col">
-          <button class="delete"> Delete </button>
-        </div>
+      <div class="col">
+        <h3 class="head2">ID</h3>
       </div>
+      <div class="col">
+        <h3 class="head3">DELETE USER</h3>
+      </div>
+    </div>
+    <div class="row record border-bottom border-secondary">
+      <div class="col">
+        <h4 class="head1">Dai Alaa</h4>
+      </div>
+      <div class="col">
+        <h4 class="head2">5e7648a37966e84270c96b48</h4>
+      </div>
+      <div class="col">
+        <button class="delete">Delete</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,7 +45,7 @@ h1 {
   padding-top: 13px;
 }
 h3 {
-  color:white;
+  color: white;
   font-size: 20px;
 }
 .head1 {
@@ -81,6 +81,6 @@ h4 {
 
 <script>
 export default {
-    name: "ControlUsers"
-}
+  name: "ControlUsers",
+};
 </script>

@@ -1,25 +1,21 @@
 <template>
-    <div class="card rounded col-lg-30%">
-        <img
-        class="card-img-top mx-auto d-block"
-        src="../assets/wall1.jpg"
-        alt="Card image"
-        id="cardimg"
-        />
-        <div class="card-body" id="cardbody">
-            <h4 class="card-title" id="cardtitle">
-                Cameras
-            </h4>
-            <p class="card-text">
-                Shop now
-            </p>
-            <router-link
-                to="Category"
-                class="stretched-link"
-                id="carglink"
-            ></router-link>
-        </div>
+  <div class="card rounded col-lg-30%">
+    <img
+      class="card-img-top mx-auto d-block"
+      src="../assets/wall1.jpg"
+      alt="Card image"
+      id="cardimg"
+    />
+    <div class="card-body" id="cardbody">
+      <h4 class="card-title" id="cardtitle">Cameras</h4>
+      <p class="card-text">Shop now</p>
+      <router-link
+        to="Category"
+        class="stretched-link"
+        id="carglink"
+      ></router-link>
     </div>
+  </div>
 </template>
 <style scoped>
 .card {
