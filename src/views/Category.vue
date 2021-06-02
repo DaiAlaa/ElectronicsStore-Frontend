@@ -9,39 +9,35 @@
     <!-- <button class="userName">
         user name
       </button> -->
-      <router-link to="/AddProduct">
-        <button class="add"> 
-          Add Product
-          <i class="fa fa-plus"></i>
-        </button>
-      </router-link>
-      <router-link to="/OrdersDetails">
-        <button class="orders"> 
-          Orders' details
-        </button>
-      </router-link>
-      <router-link to="/AdminPanel/ControlUsers">
-        <button class="Admin">
-          Admin Panel
-          <i class="fa fa-user"></i>
-        </button>
-      </router-link>
-      <p class="search">
-        What's in your mind?
-      </p>
-      <input class="searchInput" placeholder="Tap to search .."/>
-      <h3> Cameras : </h3>
-      <div class="row">
-        <ProductCard 
+    <router-link to="/AddProduct">
+      <button class="add">
+        Add Product
+        <i class="fa fa-plus"></i>
+      </button>
+    </router-link>
+    <router-link to="/OrdersDetails">
+      <button class="orders">Orders' details</button>
+    </router-link>
+    <router-link to="/AdminPanel/ControlUsers">
+      <button class="Admin">
+        Admin Panel
+        <i class="fa fa-user"></i>
+      </button>
+    </router-link>
+    <p class="search">What's in your mind?</p>
+    <input class="searchInput" placeholder="Tap to search .." />
+    <h3>Cameras :</h3>
+    <div class="row">
+      <ProductCard
         v-for="Product in Products"
-            :key="Product._id"
-            :name="Product.name"
-            :ProductId="Product._id"
-            :ProductPrice="Product.price"
-            :imageId="Product.imageId"
-        />
-      </div>
+        :key="Product._id"
+        :name="Product.name"
+        :ProductId="Product._id"
+        :ProductPrice="Product.price"
+        :imageId="Product.imageId"
+      />
     </div>
+  </div>
 </template>
 <style lang="scss" scoped>
 .categoryPage {
@@ -143,7 +139,7 @@
   border-radius: 20px;
   width: 11%;
   height: 6%;
-  position:absolute;
+  position: absolute;
   margin-top: 17%;
   margin-left: 49%;
   background-color: #fff44f;
@@ -183,12 +179,15 @@ export default {
     ProductCard,
   },
   mounted() {
-    this.$store.dispatch("Products/showUserProducts" , this.$route.params.categoryId);
+    this.$store.dispatch(
+      "Products/showUserProducts",
+      this.$route.params.categoryId
+    );
   },
   computed: {
     ...mapGetters({
       Products: "Products/Products",
-    })
-  }
+    }),
+  },
 };
 </script>

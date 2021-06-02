@@ -21,15 +21,15 @@ const routes = [
     children: [
       {
         path: "",
-        component: Home
+        component: Home,
       },
       {
         path: "Category/:categoryId",
-        component: Category
+        component: Category,
       },
       {
         path: "Product/:ProductId",
-        component: Product
+        component: Product,
       },
       {
         path: "AdminPanel",
@@ -37,17 +37,17 @@ const routes = [
         children: [
           {
             path: "ControlUsers",
-            component: ControlUsers
+            component: ControlUsers,
           },
           {
             path: "Statistics",
-            component: Statistics
+            component: Statistics,
           },
           {
             path: "AddNewAdmin",
-            component: AddNewAdmin
+            component: AddNewAdmin,
           },
-        ]
+        ],
       },
       {
         path: "OrdersDetails",
@@ -58,19 +58,18 @@ const routes = [
         name: "AddProduct",
         component: AddProduct,
       },
-    ]
+    ],
   },
   {
     path: "/SignUp",
     name: "SignUp",
-    component:SignUp,
+    component: SignUp,
   },
   {
     path: "/Login",
     name: "Login",
     component: Login,
   },
-  
 ];
 
 const router = new VueRouter({

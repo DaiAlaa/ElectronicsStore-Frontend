@@ -1,30 +1,28 @@
 <template>
-    <div class="card rounded col-lg-20%">
-        <img
-        class="card-img-top mx-auto d-block"
-        src="../assets/wall1.jpg"
-        alt="Card image"
-        id="cardimg"
-        />
-        <div class="card-body" id="cardbody">
-        <h4 class="card-title" id="cardtitle">
-            {{ name }}
-        </h4>
-        <h5>
-            {{ ProductPrice  + " $"}}
-        </h5>
-        <router-link :to="{ path: '/Product/' + ProductId }">
-          <button class="viewProduct">
-            view
-          </button>
-        </router-link>
-        <!-- <router-link
+  <div class="card rounded col-lg-20%">
+    <img
+      class="card-img-top mx-auto d-block"
+      src="../assets/wall1.jpg"
+      alt="Card image"
+      id="cardimg"
+    />
+    <div class="card-body" id="cardbody">
+      <h4 class="card-title" id="cardtitle">
+        {{ name }}
+      </h4>
+      <h5>
+        {{ ProductPrice + " $" }}
+      </h5>
+      <router-link :to="{ path: '/Product/' + ProductId }">
+        <button class="viewProduct">view</button>
+      </router-link>
+      <!-- <router-link
             to="/Product"
             class="stretched-link"
             id="carglink"
         ></router-link> -->
-        </div>
     </div>
+  </div>
 </template>
 <style scoped>
 .card {
@@ -63,7 +61,7 @@ h5 {
   position: absolute;
   /* margin-top: 10%; */
 }
-.viewProduct{
+.viewProduct {
   color: black;
   background: #fff44f;
   border: none;
@@ -83,23 +81,23 @@ export default {
   name: "CategoryCard",
   props: {
     name: {
-      type: String
+      type: String,
     },
     ProductId: {
-      type: String
+      type: String,
     },
     ProductPrice: {
-      type: String
+      type: String,
     },
     imageId: {
-     type: String 
-    }
+      type: String,
+    },
   },
   filters: {
-    shorten: function(value) {
+    shorten: function (value) {
       if (value && value.length > 35) return value.substring(0, 35) + " ...";
       else return value;
-    }
-  }
+    },
+  },
 };
 </script>

@@ -1,21 +1,21 @@
 <template>
-    <div class="navBar">
-      <router-link to="/AdminPanel/ControlUsers">
-        <button class="users" v-bind:class="{ users2: route1}">
-          Control Users
-        </button>
-      </router-link>
-      <router-link to="/AdminPanel">
-        <button class="Statistics" v-bind:class="{ Statistics2: route2}">
-          Statistics
-        </button>
-      </router-link>
-      <router-link to="/AdminPanel/AddNewAdmin">
-        <button class="newAdmin" v-bind:class="{ newAdmin2: route3}">
-          Add new admin
-        </button>
-      </router-link>
-    </div>
+  <div class="navBar">
+    <router-link to="/AdminPanel/ControlUsers">
+      <button class="users" v-bind:class="{ users2: route1 }">
+        Control Users
+      </button>
+    </router-link>
+    <router-link to="/AdminPanel">
+      <button class="Statistics" v-bind:class="{ Statistics2: route2 }">
+        Statistics
+      </button>
+    </router-link>
+    <router-link to="/AdminPanel/AddNewAdmin">
+      <button class="newAdmin" v-bind:class="{ newAdmin2: route3 }">
+        Add new admin
+      </button>
+    </router-link>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -103,7 +103,9 @@
   outline: none;
   font-weight: bold;
 }
-.Statistics:focus, .users:focus, .newAdmin:focus {
+.Statistics:focus,
+.users:focus,
+.newAdmin:focus {
   background-color: white;
   color: #161516;
 }
@@ -131,34 +133,29 @@ export default {
       } else {
         this.route2 = false;
       }
-      if (this.$router.currentRoute.path == "/AdminPanel/AddNewAdmin"){
+      if (this.$router.currentRoute.path == "/AdminPanel/AddNewAdmin") {
         this.route3 = true;
-      }
-      else {
+      } else {
         this.route3 = false;
       }
-    }
+    },
   },
   mounted() {
-     if (this.$router.currentRoute.path == "/AdminPanel/ControlUsers")
-      {
-        this.route1 = true;
-      } 
-      else {
-        this.route1 = false;
-      }
-      if (this.$router.currentRoute.path == "/AdminPanel/Statistics"){
-        this.route2 = true;
-      }
-      else {
-        this.route2 = false;
-      }
-      if (this.$router.currentRoute.path == "/AdminPanel/AddNewAdmin"){
-        this.route3 = true;
-      }
-      else {
-        this.route3 = false;
-      }
-  }
-}
+    if (this.$router.currentRoute.path == "/AdminPanel/ControlUsers") {
+      this.route1 = true;
+    } else {
+      this.route1 = false;
+    }
+    if (this.$router.currentRoute.path == "/AdminPanel/Statistics") {
+      this.route2 = true;
+    } else {
+      this.route2 = false;
+    }
+    if (this.$router.currentRoute.path == "/AdminPanel/AddNewAdmin") {
+      this.route3 = true;
+    } else {
+      this.route3 = false;
+    }
+  },
+};
 </script>
