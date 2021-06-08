@@ -33,17 +33,20 @@
       placeholder="Tap to search .."
       v-model="SearchValue"
       autocomplete="off"
+      v-on:input="check(SearchValue)"
     />
-    <div class="row justify-content-center" v-if="SearchValue == ''">
+    <div class="row justify-content-center" v-if="searchResults.length == 0 && !this.notFound">
       <CategoryCard
         v-for="category in Categories"
         :key="category._id"
         :name="category.name"
         :categoryId="category._id"
         :categoryDes="category.description"
+        :imageId="category.imageId"
+        :images="'http://localhost:7000/image/get?imageId=' +category.imageId"
       />
     </div>
-    <div class="row" v-if="SearchValue != '' && searchResults.length != 0">
+    <div class="row searchRow" v-if="SearchValue != '' && searchResults.length != 0">
       <ProductCard
         v-for="Product in searchResults"
         :key="Product._id"
@@ -51,9 +54,10 @@
         :ProductId="Product._id"
         :ProductPrice="Product.price"
         :imageId="Product.imageId"
+        :images="'http://localhost:7000/image/get?imageId=' + Product.imageId"
       />
     </div>
-    <p class="notFound" v-if="SearchValue != '' && this.notFound">Not Found</p>
+    <p class="notFound" v-if="SearchValue != '' && searchResults.length == 0 && this.notFound">Not Found</p>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -184,15 +188,19 @@ i {
   margin-left: 4%;
 }
 .row {
-  height: 100%;
+  // height: 100%;
   width: 100%;
   margin-bottom: 120px;
 }
 .notFound {
   text-align: center;
-  font-size: 30px;
+  font-size: 35px;
   color: gray;
   margin-top: 4%;
+}
+.searchRow {
+  margin-bottom: 120px;
+  padding-left: 4%;
 }
 </style>
 
@@ -217,11 +225,20 @@ export default {
     search() {
       if (this.SearchValue != "") {
         this.$store.dispatch("Products/searchProducts", this.SearchValue);
-        if (this.searchResults.length == 0) {
-          this.notFound == true;
-        }
+        setTimeout(() => {
+        if (this.searchResults.length == 0){
+          this.notFound = true;
+        } 
+        }, 200);
       }
     },
+    check(SearchValue) {
+      if (SearchValue == "")
+      {
+        this.searchResults.length = 0;
+        this.notFound = false;
+      }
+    }
   },
   mounted() {
     this.$store.dispatch("Products/showUserCategories");

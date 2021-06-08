@@ -24,19 +24,38 @@
         <i class="fa fa-user"></i>
       </button>
     </router-link>
-    <p class="search">What's in your mind?</p>
-    <input class="searchInput" placeholder="Tap to search .." />
-    <h3>Cameras :</h3>
-    <div class="row">
+    <button class="SearchButton" @click="search()">Search</button>
+    <input class="searchInput" placeholder="Tap to search .." 
+      v-model="SearchValue"
+      autocomplete="off"
+      v-on:input="check(SearchValue)"
+    />
+    <h3 v-if="searchResults.length == 0 && !this.notFound"> 
+      {{this.categoryName}} 
+    </h3>
+    <div class="row" v-if="searchResults.length == 0 && !this.notFound && this.show">
       <ProductCard
-        v-for="Product in Products"
+        v-for="Product in this.products"
         :key="Product._id"
         :name="Product.name"
         :ProductId="Product._id"
         :ProductPrice="Product.price"
         :imageId="Product.imageId"
+        :images="'http://localhost:7000/image/get?imageId=' + Product.imageId"
       />
     </div>
+    <div class="row searchRow" v-if="SearchValue != '' && searchResults.length != 0">
+      <ProductCard
+        v-for="Product in searchResults"
+        :key="Product._id"
+        :name="Product.name"
+        :ProductId="Product._id"
+        :ProductPrice="Product.price"
+        :imageId="Product.imageId"
+        :images="'http://localhost:7000/image/get?imageId=' + Product.imageId"
+      />
+    </div>
+    <p class="notFound" v-if="SearchValue != '' && searchResults.length == 0 && this.notFound">Not Found</p>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -91,7 +110,7 @@
   padding-right: 15px;
 }
 .searchInput {
-  margin-top: 11%;
+  margin-top: 13%;
   width: 23%;
   height: 5.5%;
   border-radius: 20px;
@@ -158,14 +177,39 @@ h3 {
   margin-left: 3%;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   margin-bottom: 3%;
-  margin-top: 4%;
+  margin-top: 1%;
 }
 .row {
-  height: 100%;
+  // height: 100%;
   width: 100%;
-  margin-bottom: 120px;
   padding-left: 4%;
   /* padding-right: 2%; */
+}
+.SearchButton {
+  border: none;
+  border-radius: 20px;
+  width: 6%;
+  height: 5.5%;
+  left: 32%;
+  margin-top: 13%;
+  position: absolute;
+  background-color: #fff44f;
+  color: black;
+  text-decoration: none;
+  outline: none;
+}
+.SearchButton:hover {
+  background-color: #ffee07;
+}
+.notFound {
+  text-align: center;
+  font-size: 35px;
+  color: gray;
+  margin-top: 4%;
+}
+.searchRow {
+  margin-bottom: 120px;
+  padding-left: 4%;
 }
 </style>
 
@@ -173,21 +217,71 @@ h3 {
 // @ is an alias to /src
 import ProductCard from "@/components/ProductCard.vue";
 import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "Category",
+  data: function () {
+    return {
+      SearchValue: "",
+      notFound: false,
+      categoryName: "",
+      products: [],
+      show: false,
+    };
+  },
   components: {
     ProductCard,
   },
+  methods: {
+    search() {
+      if (this.SearchValue != "") {
+        this.$store.dispatch("Products/searchProducts", this.SearchValue);
+        setTimeout(() => {
+        if (this.searchResults.length == 0){
+          this.notFound = true;
+        } 
+        }, 200);
+      }
+    },
+    check(SearchValue) {
+      if (SearchValue == "")
+      {
+        this.searchResults.length = 0;
+        this.notFound = false;
+      }
+    },
+  },
   mounted() {
     this.$store.dispatch(
-      "Products/showUserProducts",
-      this.$route.params.categoryId
-    );
+      "Products/showUserProducts", this.$route.params.categoryId);
+    if (this.$route.params.categoryId == "60bef33e55fac81818313490"){
+      this.categoryName = "Laptops:"
+    }
+    else if (this.$route.params.categoryId == "60bef36555fac81818313491"){
+      this.categoryName = "Tablets:"
+    }
+    else if (this.$route.params.categoryId == "60bef3a955fac81818313492"){
+      this.categoryName = "Mobile Phones:"
+    }
+    else if (this.$route.params.categoryId == "60bef41a55fac81818313493"){
+      this.categoryName = "TVs:"
+    }
+    else if (this.$route.params.categoryId == "60bef46c55fac81818313494"){
+      this.categoryName = "Cameras:"
+    }
+    setTimeout(() => {
+      this.products = this.userProducts;
+      this.show = true;
+      }, 300); 
   },
   computed: {
     ...mapGetters({
-      Products: "Products/Products",
+      // userProducts: "Products/Products1",
+      searchResults: "Products/searchResults",
     }),
+    ...mapState({
+       userProducts: state => state.Products.userProducts,
+    })
   },
 };
 </script>

@@ -1,7 +1,6 @@
 <template>
     <div class="productPage">
       <BuyProduct v-if="PurchaseModal"/>
-      
       <router-link to="/SignUp">
         <button class="sign">
           SIGN UP
@@ -16,32 +15,53 @@
       <!-- <button class="userName">
         user name
       </button> -->
-      <hr>
-      <div class="container">
-        <div class="row row1">
-          <div class="col">
-            <img
-              class="productImage"
-              src="../assets/wall1.jpg"
-              alt="Card image"
-              id="cardimg"
-            />
-          </div>
-          <div class="col info">
-            <p class="productName">{{ProductName}}</p>
-            <h5 class="arrtibute">Describtion :</h5>
-            <p class="productDes">{{ProductDes}}</p>
-            <h5 class="arrtibute">Price :</h5>
-            <p class="productPrice"> {{ProductPrice + " $"}}</p>
-            <h5 class="arrtibute">Add review :</h5>
-            <span @click="isActive1 = !isActive1" class="fa fa-star star" v-bind:class="{ checked: isActive1}"></span>
-            <span @click="isActive2 = !isActive2" class="fa fa-star star" v-bind:class="{ checked: isActive2}"></span>
-            <span @click="isActive3 = !isActive3" class="fa fa-star star" v-bind:class="{ checked: isActive3}"></span>
-            <span @click="isActive4 = !isActive4" class="fa fa-star star" v-bind:class="{ checked: isActive4}"></span>
-            <span @click="isActive5 = !isActive5" class="fa fa-star star" v-bind:class="{ checked: isActive5}"></span>
-            <hr>
-            <button class="buy" @click="OpenPurchaseForm()" >Buy Now</button>
-          </div>
+    <hr />
+    <div class="container">
+      <div class="row row1" v-if="this.show">
+        <div class="col">
+          <img
+            class="productImage"
+            :src="'http://localhost:7000/image/get?imageId='+ ProductImage"
+            alt="Card image"
+            id="cardimg"
+          />
+        </div>
+        <div class="col info">
+          <p class="productName">{{ this.name }}</p>
+          <h5 class="arrtibute" v-if="ProductDes != undefined">Describtion :</h5>
+          <p class="productDes">{{ this.des }}</p>
+          <h5 class="arrtibute">Price :</h5>
+          <p class="productPrice"> {{ this.price }} 
+            <span class="productPrice"> $ </span>
+          </p>
+          <h5 class="arrtibute">Add review :</h5>
+          <span
+            @click="isActive1 = !isActive1"
+            class="fa fa-star star"
+            v-bind:class="{ checked: isActive1 }"
+          ></span>
+          <span
+            @click="isActive2 = !isActive2"
+            class="fa fa-star star"
+            v-bind:class="{ checked: isActive2 }"
+          ></span>
+          <span
+            @click="isActive3 = !isActive3"
+            class="fa fa-star star"
+            v-bind:class="{ checked: isActive3 }"
+          ></span>
+          <span
+            @click="isActive4 = !isActive4"
+            class="fa fa-star star"
+            v-bind:class="{ checked: isActive4 }"
+          ></span>
+          <span
+            @click="isActive5 = !isActive5"
+            class="fa fa-star star"
+            v-bind:class="{ checked: isActive5 }"
+          ></span>
+          <hr />
+          <button class="buy" @click="OpenPurchaseForm()">Buy Now</button>
         </div>
         
         <!-- <div class="row row2">
@@ -57,6 +77,7 @@
         </div> -->
       </div>
     </div>
+  </div>
 </template>
 <style lang="scss" scoped>
 .productPage {
@@ -123,10 +144,10 @@
   text-align: left;
   margin-left: 10%;
 }
-.productImage{
-    width: 95%;
-    height: 60%;
-    margin-left: 20%;
+.productImage {
+  width: 550px;
+  height: 450px;
+  margin-left: 14%;
 }
 .productName {
   font-size: 33px;
@@ -157,7 +178,7 @@
   border: none;
   color: #161516;
   background-color: #fff44f;
-  width: 18%;
+  width: 22%;
   height: 5%;
   font-weight: bold;
 }
@@ -193,15 +214,35 @@ export default {
     name: "Product",
     data: function() {
     return {
-      isActive1 : false,
-      isActive2 : false,
-      isActive3 : false,
-      isActive4 : false,
-      isActive5 : false,
-    }
-    },
-    mounted() {
-    this.$store.dispatch("Products/showProduct" , this.$route.params.ProductId);
+      isActive1: false,
+      isActive2: false,
+      isActive3: false,
+      isActive4: false,
+      isActive5: false,
+      name: "",
+      id: "",
+      price: 0,
+      des: "",
+      image: "",
+      show: false,
+      Colors: [],
+    };
+  },
+  mounted() {
+    this.$store.dispatch("Products/showProduct", this.$route.params.ProductId);
+    setTimeout(() => {
+      this.name = this.ProductName;
+      this.id = this.ProductId;
+      this.price = this.ProductPrice;
+      this.des = this.ProductDes;
+      this.image = this.ProductImage;
+      this.show = true;
+      var i = 0;
+      for (const color in this.ProductColor) {
+          this.Colors[i] = `${color}`;
+          i = i + 1;
+      }
+      }, 300); 
   },
     computed: {
     ...mapGetters({
