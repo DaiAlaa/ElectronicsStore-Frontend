@@ -2,7 +2,7 @@
   <div class="card rounded col-lg-30%">
     <img
       class="card-img-top mx-auto d-block"
-      src="../assets/wall1.jpg"
+      :src="images"
       alt="Card image"
       id="cardimg"
     />
@@ -26,7 +26,7 @@
 .card {
   background: #313030;
   width: 24%;
-  height: 54%;
+  height: 400px;
   margin-left: 17px;
   margin-top: 17px;
   margin-bottom: 17px;
@@ -55,7 +55,6 @@ p {
  * @displayName Artists card
  * @example [none]
  */
-
 export default {
   name: "CategoryCard",
   props: {
@@ -68,6 +67,9 @@ export default {
     categoryId: {
       type: String,
     },
+    images: {
+      type: String,
+    }
   },
   // computed: {
   //   ...mapGetters({

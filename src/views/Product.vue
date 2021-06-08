@@ -11,21 +11,23 @@
       </button> -->
     <hr />
     <div class="container">
-      <div class="row row1">
+      <div class="row row1" v-if="this.show">
         <div class="col">
           <img
             class="productImage"
-            src="../assets/wall1.jpg"
+            :src="'http://localhost:7000/image/get?imageId='+ ProductImage"
             alt="Card image"
             id="cardimg"
           />
         </div>
         <div class="col info">
-          <p class="productName">{{ ProductName }}</p>
-          <h5 class="arrtibute">Describtion :</h5>
-          <p class="productDes">{{ ProductDes }}</p>
+          <p class="productName">{{ this.name }}</p>
+          <h5 class="arrtibute" v-if="ProductDes != undefined">Describtion :</h5>
+          <p class="productDes">{{ this.des }}</p>
           <h5 class="arrtibute">Price :</h5>
-          <p class="productPrice">{{ ProductPrice + " $" }}</p>
+          <p class="productPrice"> {{ this.price }} 
+            <span class="productPrice"> $ </span>
+          </p>
           <h5 class="arrtibute">Add review :</h5>
           <span
             @click="isActive1 = !isActive1"
@@ -137,9 +139,9 @@
   margin-left: 10%;
 }
 .productImage {
-  width: 95%;
-  height: 60%;
-  margin-left: 20%;
+  width: 550px;
+  height: 450px;
+  margin-left: 14%;
 }
 .productName {
   font-size: 33px;
@@ -170,7 +172,7 @@
   border: none;
   color: #161516;
   background-color: #fff44f;
-  width: 18%;
+  width: 22%;
   height: 5%;
   font-weight: bold;
 }
@@ -204,10 +206,24 @@ export default {
       isActive3: false,
       isActive4: false,
       isActive5: false,
+      name: "",
+      id: "",
+      price: 0,
+      des: "",
+      image: "",
+      show: false,
     };
   },
   mounted() {
     this.$store.dispatch("Products/showProduct", this.$route.params.ProductId);
+    setTimeout(() => {
+      this.name = this.ProductName;
+      this.id = this.ProductId;
+      this.price = this.ProductPrice;
+      this.des = this.ProductDes;
+      this.image = this.ProductImage;
+      this.show = true;
+      }, 300); 
   },
   computed: {
     ...mapGetters({

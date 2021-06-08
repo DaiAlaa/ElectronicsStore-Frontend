@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <img class="logo" src="../assets/GLogo.jpeg" alt="logo" />
+    <router-link to="/">
+      <img class="logo" src="../assets/GLogo.jpeg" alt="logo" />
+    </router-link>
     <router-view class="child"></router-view>
   </div>
 </template>

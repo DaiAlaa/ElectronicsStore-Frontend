@@ -4,13 +4,14 @@ export default {
   namespaced: true,
   state: {
     userCategories: [],
-    ProductName: "dai",
+    ProductName: "",
     ProductId: "",
-    ProductPrice: "40",
-    ProductDes: "kkmkkkkkkkkkk",
+    ProductPrice: 0,
+    ProductDes: "",
     ProductImage: "",
     colors: [],
     searchResults: [],
+    Orders: [],
   },
   mutations: {
     setUserCategories(state, Categories) {
@@ -37,6 +38,9 @@ export default {
     setSearchProducts(state, searchProducts) {
       state.searchResults = searchProducts;
     },
+    setOrders(state, Orders) {
+      state.Orders = Orders;
+    },
   },
   actions: {
     showUserCategories({ commit }) {
@@ -57,12 +61,13 @@ export default {
     },
     showUserProducts({ commit }, categoryId) {
       axios
-        .get("http://localhost:7000/product/get/" + categoryId) // pageNumber
+        .get("http://localhost:7000/product/get?categoryId=" + categoryId + "&pageNumber=1&pageSize=25") // pageNumber
         .then((response) => {
+          console.log("categoryId" , categoryId);
           let Products = response.data;
-          if (response.status != 200) {
-            Products = [];
-          }
+          // if (response.status != 200) {
+          //   Products = [];
+          // }
           commit("setUserProducts", Products);
         })
         .catch((error) => {
@@ -73,7 +78,7 @@ export default {
     },
     showProduct({ commit }, productId) {
       axios
-        .get("http://localhost:7000/product/getOne/" + productId)
+        .get("http://localhost:7000/product/getOne?productId=" + productId)
         .then((response) => {
           let Product = response.data;
           commit("setProductName", Product.name);
@@ -91,7 +96,7 @@ export default {
         .get(
           "http://localhost:7000/product/search?q=" +
             searchValue +
-            "&pageNumber=1&pageSize=10"
+            "&pageNumber=1&pageSize=23"
         )
         .then((response) => {
           let searchProducts = response.data;
@@ -110,15 +115,32 @@ export default {
       //   commit("settopres", []);
       // });
     },
+    showOrders({ commit }) {
+      axios
+        .get("http://localhost:7000/order/get?pageNumber=1&pageSize=10")
+        .then((response) => {
+          let Orders = response.data;
+          if (response.status != 200) {
+            Orders = [];
+          }
+          commit("setUserCategories", Orders);
+        })
+        .catch((error) => {
+          let Orders = [];
+          commit("setUserCategories", Orders);
+          console.log(error);
+        });
+    },
   },
   getters: {
     Categories: (state) => state.userCategories,
-    Products: (state) => state.userProducts,
+    Products1: (state) => state.userProducts,
     ProductName: (state) => state.ProductName,
     ProductId: (state) => state.ProductId,
     ProductPrice: (state) => state.ProductPrice,
     ProductDes: (state) => state.ProductDes,
     ProductImage: (state) => state.ProductImage,
     searchResults: (state) => state.searchResults,
+    Orders: (state) => state.Orders, 
   },
 };
