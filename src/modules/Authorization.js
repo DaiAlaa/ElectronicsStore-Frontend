@@ -1,20 +1,22 @@
 import axios from "axios";
 import store from "../store";
-//import router from "../router/index";
+import router from "../router/index";
 export default {
   namespaced: true,
   state: {
     status: "",
     upgraded: "",
-    token: localStorage.getItem("x-auth-token") || "",
+    token: localStorage.getItem("Authorization") || "",
     resendtoken: localStorage.getItem("X-token") || "",
     User: {},
     emailConfirmed: Boolean,
     //short cicuit evaluation if the first argument return anything but null it will be stored if not token=''
   },
   mutations: {
-    auth_request(state) {
-      state.status = "loading";
+    auth_faild(state) {
+      state.status = "faild";
+      state.token = "";
+      state.User = {};
     },
     auth_success(state, { token, user }) {
       state.status = "success";
@@ -45,8 +47,9 @@ export default {
         })
         .then((response) => {
           ///////////////////
-          const token = response.data.token;
+          const token = response.data.access_token;
           localStorage.setItem("X-token", token);
+          store.dispatch("Authorization/get_user", true);
           console.log("Nerdeen", token);
           ///////////////
         })
@@ -64,22 +67,45 @@ export default {
           password: user.password,
         })
         .then((response) => {
-          const token = response.data.token;
-          localStorage.setItem("x-auth-token", token);
-          axios.defaults.headers.common["x-auth-token"] = token;
+          const token = response.data.access_token;
+          localStorage.setItem("Authorization", token);
+          axios.defaults.headers.common["Authorization"] = token;
+          console.log("login",token);
           store.dispatch("Authorization/get_user", true);
         })
         .catch((error) => {
           console.log(error);
           commit("auth_error", "login_err");
-          localStorage.removeItem("x-auth-token");
+          localStorage.removeItem("Authorization");
+        });
+    },
+    get_user({ commit }, flag) {
+      const token = localStorage.getItem("Authorization");
+      console.log("y :",token);
+      axios.defaults.headers.common["Authorization"] = token;
+      commit("auth_request");
+      axios
+        .get("http://localhost:7000/Admin/get-user")
+        .then(response => {
+          const user = response.data;
+          console.log("user:",user);
+          commit("auth_success", { token, user });
+          console.log("status",status);
+          localStorage.setItem("is-admin", user.role);
+          if (flag) router.replace("/");
+        })
+        .catch(error => {
+          commit("auth_error", "user_err");
+          localStorage.removeItem("Authorization");
+          console.log(error);
         });
     },
   },
   getters: {
-    Username: (state) => state.User.displayName,
+    Username: (state) => state.User.name,
     GetStatus: (state) => state.status,
-    user: (state) => state.User,
-    userid: (state) => state.User._id,
+    User: (state) => state.User,
+    UserID: (state) => state.User._id,
+    UserRole:(state)=>state.User.role,
   },
 };

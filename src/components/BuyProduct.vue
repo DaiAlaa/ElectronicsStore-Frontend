@@ -3,13 +3,14 @@
     <!-- <transition name="fade" appear>
       <div
         class="modal-overlay"
-        v-if="showModal"
-        @click="showModal = false"
+        v-if="PurchaseModal"
+        @click="PurchaseModal = false"
       ></div>
     </transition> -->
     <transition name="slide" appear>
-      <div class="modal" v-if="showModal">
+      <div class="modal" v-if="PurchaseModal">
         <form>
+          <strong>personal info</strong>
           <p>Full Name</p>
           <input
             class="input_field"
@@ -39,7 +40,7 @@
           />
           <br />
           <p>City</p>
-          <select v-model="City" class="City_select" testid="city input">
+          <select v-model="city" class="City_select" testid="city input">
             <option
               v-for="city in cities"
               :key="city.value"
@@ -85,14 +86,25 @@
             class="input_field"
             type="text"
             placeholder="CreditCard Number"
-            v-model="CreditCardr"
+            v-model="CreditCard"
             testid="CreditCard input"
             id="CreditCard"
           />
           <br />
+          <strong>product info</strong>
+          <p>Product Color</p> 
+         <select v-model="color" class="color_select" testid="color input">
+            <option
+              v-for="color in ProductColors"
+              :key="color.text"
+              :value="color.text"
+            >
+              {{ color.text }}
+            </option>
+          </select>  
 
           <button
-            @click.prevent="buyProduct(), changeModalState()"
+            @click.prevent="buyProduct(), changePurchaseModalState()"
             class="costum-btn justify-content-center"
             id="buy-btn"
             type="submit"
@@ -100,7 +112,7 @@
           >
             Buy this product
           </button>
-          <button class="customButton" @click="changeModalState()">
+          <button class="customButton" @click="changePurchaseModalState()" >
             cancel
           </button>
         </form>
@@ -156,7 +168,7 @@ div {
 
 .modal {
   position: relative;
-  z-index: 20;
+  z-index: 80;
   top: 0;
   left: 0;
   width: 50vw;
@@ -188,7 +200,7 @@ input {
   outline: none;
   font-weight: bold;
   margin-top: 2vh;
-  z-index: 20;
+  z-index: 80;
 }
 select {
   border-radius: 2px;
@@ -301,12 +313,14 @@ h2 {
 }
 </style>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "BuyProduct",
   data: function () {
     return {
-      //   playlistname: ""
-      showModal: true,
+      // showModal: true,
+      Name:"",
+      MobileNumber:"",
       city: "0",
       cities: [
         { text: "Choose a country", value: "0", disabled: true },
@@ -338,8 +352,43 @@ export default {
         { text: "South Sinai", value: "South Sinai", disabled: false },
         { text: "Suez", value: "Suez", disabled: false },
       ],
+      color:"",
+      StreetName:"0",
+      BuildingNumber:"0",
+      FloorNumber:"",
+      CreditCard:"",
     };
   },
   components: {},
+  methods:{
+
+    Buy_Product(){
+      console.log("in popup",this.color)
+      let Address=this.StreetName+this.city;
+      let ProductInfo={
+        productId:this.ProductId,
+        color:this.color,
+        address:Address,
+        phone:this.MobileNumber,
+        creditCard:this.CreditCard
+
+      }
+      this.$store.dispatch("Products/Buy_Product", ProductInfo);
+    },
+    changePurchaseModalState(){
+     console.log("in buyproduct",this.PurchaseModal);
+
+      this.$store.dispatch("Products/togglePurchaseForm");
+     console.log(" buyproduct",this.PurchaseModal);
+
+    }
+  },
+  computed:{
+     ...mapGetters({
+      ProductId: "Products/ProductId",
+      ProductColors:"Products/ProductColor",
+      PurchaseModal:"Products/PurchaseModal",
+    }),
+  },
 };
 </script>
