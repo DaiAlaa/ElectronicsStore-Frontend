@@ -1,5 +1,7 @@
 <template>
     <div class="productPage">
+      <BuyProduct v-if="PurchaseModal"/>
+      
       <router-link to="/SignUp">
         <button class="sign">
           SIGN UP
@@ -10,6 +12,7 @@
           LOG IN
         </button>
       </router-link>
+      <SuccessfulPurchase v-if="SuccessPurchase"/>
       <!-- <button class="userName">
         user name
       </button> -->
@@ -37,9 +40,10 @@
             <span @click="isActive4 = !isActive4" class="fa fa-star star" v-bind:class="{ checked: isActive4}"></span>
             <span @click="isActive5 = !isActive5" class="fa fa-star star" v-bind:class="{ checked: isActive5}"></span>
             <hr>
-            <button class="buy">Buy Now</button>
+            <button class="buy" @click="OpenPurchaseForm()" >Buy Now</button>
           </div>
         </div>
+        
         <!-- <div class="row row2">
           <div class="col">
             <img 
@@ -57,6 +61,7 @@
 <style lang="scss" scoped>
 .productPage {
     height: 100%;
+    // position:static;
 }
 .sign {
   border: none;
@@ -167,6 +172,11 @@
   color: white;
   margin-top: 10%;
 }
+.SuccessfulPurchase{
+  position: absolute;
+  top:0%;
+  z-index: 1000;
+}
 // .row2 {
 //   width: 100%;
 //   height: 60.2%;
@@ -178,6 +188,8 @@
 
 <script>
 import { mapGetters } from "vuex";
+import BuyProduct from "@/components/BuyProduct.vue";
+import SuccessfulPurchase from "@/components/SuccessfulPurchase.vue";
 export default {
     name: "Product",
     data: function() {
@@ -199,7 +211,21 @@ export default {
       ProductPrice: "Products/ProductPrice",
       ProductDes: "Products/ProductDes",
       ProductImage: "Products/ProductImage",
+      PurchaseModal:"Products/PurchaseModal",
+      ProductColor:"Products/ProductColor",
+      SuccessPurchase:"Products/SuccessPurchase"
     })
-  }
+  },
+  methods:{
+    OpenPurchaseForm(){
+      console.log("before SP",this.Successpurchase);
+      this.$store.dispatch("Products/togglePurchaseForm");
+      console.log("after",this.PurchaseModal);
+    }
+  },
+   components: {
+     BuyProduct,
+     SuccessfulPurchase
+   }
 }
 </script>

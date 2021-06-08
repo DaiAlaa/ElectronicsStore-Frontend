@@ -220,7 +220,7 @@
               type="radio"
               id="female_gender"
               class="gender_field gender-radio"
-              value="m"
+              value="Male"
               v-model="gender"
               testid="gender male radio button"
             />
@@ -228,7 +228,7 @@
             <input
               type="radio"
               class="gender_field gender-radio"
-              value="f"
+              value="Female"
               v-model="gender"
               testid="gender female radio button"
             />
@@ -450,6 +450,7 @@ export default {
         { text: "November", value: "11", disabled: false },
         { text: "December", value: "12", disabled: false },
       ],
+      
       country: "0",
       countries: [
         { text: "Choose a country", value: "0", disabled: true },
@@ -498,7 +499,7 @@ export default {
             birthday: this.birthday,
           };
           this.$store.dispatch("Authorization/signUp", newuser);
-          this.$router.replace("/EmailConfirmation");
+          // this.$router.replace("/");
         } else return;
       }, 200);
     },
