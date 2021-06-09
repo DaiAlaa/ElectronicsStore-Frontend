@@ -1,24 +1,24 @@
 <template>
   <div class="categoryPage">
-    <router-link to="/SignUp">
+    <router-link to="/SignUp" v-if="GetStatus == '' || GetStatus == 'faild'">
       <button class="sign">SIGN UP</button>
     </router-link>
-    <router-link to="/">
+    <router-link to="/Login" v-if="GetStatus == '' || GetStatus == 'faild'">
       <button class="log">LOG IN</button>
     </router-link>
-    <!-- <button class="userName">
-        user name
-      </button> -->
-    <router-link to="/AddProduct">
+    <button class="userName" v-if="GetStatus == 'success'">
+        {{ Username }}
+    </button>
+    <router-link to="/AddProduct" v-if="UserRole == 'Admin' || UserRole == 'Employee'">
       <button class="add">
         Add Product
         <i class="fa fa-plus"></i>
       </button>
     </router-link>
-    <router-link to="/OrdersDetails">
+    <router-link to="/OrdersDetails" v-if="UserRole == 'Admin' || UserRole == 'Employee'">
       <button class="orders">Orders' details</button>
     </router-link>
-    <router-link to="/AdminPanel/ControlUsers">
+    <router-link to="/AdminPanel/ControlUsers" v-if="UserRole == 'Admin'">
       <button class="Admin">
         Admin Panel
         <i class="fa fa-user"></i>
@@ -278,6 +278,9 @@ export default {
     ...mapGetters({
       // userProducts: "Products/Products1",
       searchResults: "Products/searchResults",
+      GetStatus: "Authorization/GetStatus",
+      UserRole: "Authorization/UserRole",
+      Username: "Authorization/Username",
     }),
     ...mapState({
        userProducts: state => state.Products.userProducts,

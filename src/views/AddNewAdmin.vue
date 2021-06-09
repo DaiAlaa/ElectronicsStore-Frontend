@@ -75,8 +75,8 @@
           Employee
         </label>
       </div>
-      <p class="success" v-if="Status == 'success'">Done Successfully</p>
-      <p class="failed" v-if="Status == 'failed'">Failed</p>
+      <p class="success" v-if="Status == 'success' && this.fail == 0">Done Successfully</p>
+      <p class="failed" v-if="Status == 'failed' || this.fail == 1">Failed</p>
       <button class="add" @click="addUser()">ADD</button>
     </div>
   </div>
@@ -157,6 +157,7 @@ export default {
       Mobile: "",
       Address: "",
       submit: false,
+      fail: 0,
     };
   },
   methods: {
@@ -176,6 +177,7 @@ export default {
         to_check.indexOf(".com") + 4 != to_check.length
       ) {
         this.cannotSubmit();
+        console.log("reqEmail no");
         return true;
       } else {
         this.canSubmit();
@@ -185,6 +187,7 @@ export default {
     reqPassword() {
       if (this.Password == "") {
         this.cannotSubmit();
+        console.log("reqPassword no");
         return true;
       } else {
         this.canSubmit();
@@ -194,6 +197,7 @@ export default {
     reqUsername() {
       if (this.Name == "") {
         this.cannotSubmit();
+        console.log("reqUsername no");
         return true;
       } else {
         this.canSubmit();
@@ -203,6 +207,7 @@ export default {
     reqRole() {
       if (this.Role == "") {
         this.cannotSubmit();
+        console.log("reqRole no");
         return true;
       } else {
         this.canSubmit();
@@ -212,6 +217,7 @@ export default {
     reqCredit() {
       if (this.Credit == "") {
         this.cannotSubmit();
+         console.log("reqCredit no");
         return true;
       } else {
         this.canSubmit();
@@ -225,6 +231,7 @@ export default {
         this.Mobile[1] != "1"
       ) {
         this.cannotSubmit();
+        console.log("mob no");
         return true;
       } else {
         this.canSubmit();
@@ -234,6 +241,7 @@ export default {
     reqAddress() {
       if (this.Address == "") {
         this.cannotSubmit();
+        console.log("add no");
         return true;
       } else {
         this.canSubmit();
@@ -249,6 +257,7 @@ export default {
       this.reqCredit();
       this.reqMobile();
       this.reqAddress();
+      console.log("this.submit" , this.submit);
       setTimeout(() => {
         if (this.submit) {
           let newuser = {
@@ -261,7 +270,10 @@ export default {
             address: this.Address,
           };
           this.$store.dispatch("Users/CreateAdminEmplyee", newuser);
-        } else return;
+        } else {
+          this.fail = 1;
+          return;
+        }
       }, 200);
     },
   },

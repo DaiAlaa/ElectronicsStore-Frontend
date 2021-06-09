@@ -1,24 +1,25 @@
 <template>
   <div class="homePage">
-    <router-link to="/SignUp">
+    <router-link to="/SignUp" v-if="GetStatus == '' || GetStatus == 'faild'">
       <button class="sign">SIGN UP</button>
     </router-link>
-    <router-link to="/Login">
+    <router-link to="/Login" v-if="GetStatus == '' || GetStatus == 'faild'">
       <button class="log">LOG IN</button>
     </router-link>
-    <!-- <button class="userName">
-        user name
-      </button> -->
-    <router-link to="/AddProduct">
+    <button class="userName" v-if="GetStatus == 'success'">
+        {{ Username }}
+        <i class="fa fa-user me"></i>
+    </button>
+    <router-link to="/AddProduct" v-if="UserRole == 'Admin' || UserRole == 'Employee'">
       <button class="add">
         Add Product
         <i class="fa fa-plus"></i>
       </button>
     </router-link>
-    <router-link to="/OrdersDetails">
+    <router-link to="/OrdersDetails" v-if="UserRole == 'Admin' || UserRole == 'Employee'">
       <button class="orders">Orders' details</button>
     </router-link>
-    <router-link to="/AdminPanel/ControlUsers">
+    <router-link to="/AdminPanel/ControlUsers" v-if="UserRole == 'Admin'">
       <button class="Admin">
         Admin Panel
         <i class="fa fa-user"></i>
@@ -99,10 +100,10 @@
 .userName {
   border: none;
   border-radius: 20px;
-  width: 8% auto;
-  height: 5%;
+  width: 150px;
+  height: 45px;
   margin-top: 2%;
-  margin-left: 52%;
+  margin-left: 660px;
   position: absolute;
   background: #313030;
   color: white;
@@ -110,6 +111,7 @@
   outline: none;
   padding-left: 15px;
   padding-right: 15px;
+  font-size: 20px;
 }
 .searchInput {
   margin-top: 13%;
@@ -202,6 +204,11 @@ i {
   margin-bottom: 120px;
   padding-left: 4%;
 }
+.me {
+  font-size: 20px;
+  color: white;
+  margin-left: 2%;
+}
 </style>
 
 <script>
@@ -247,6 +254,9 @@ export default {
     ...mapGetters({
       Categories: "Products/Categories",
       searchResults: "Products/searchResults",
+      GetStatus: "Authorization/GetStatus",
+      UserRole: "Authorization/UserRole",
+      Username: "Authorization/Username",
     }),
   },
 };
