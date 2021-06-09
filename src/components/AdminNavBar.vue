@@ -6,7 +6,7 @@
       </button>
     </router-link>
     <router-link to="/AdminPanel">
-      <button class="Statistics" v-bind:class="{ Statistics2: route2 }">
+      <button class="Statistics" v-bind:class="{ Statistics2: route2 }" @click="ShowStats()">
         Statistics
       </button>
     </router-link>
@@ -157,5 +157,10 @@ export default {
       this.route3 = false;
     }
   },
+  methods:{
+    ShowStats(){
+      this.$store.dispatch("Products/ShowStats");
+    }
+  }
 };
 </script>

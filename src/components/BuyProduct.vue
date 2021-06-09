@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="boss">
     <!-- <transition name="fade" appear>
       <div
         class="modal-overlay"
@@ -21,14 +21,6 @@
             id="Name"
           />
           <br />
-          <p
-            v-if="req_name == true"
-            class="invalid"
-            testid="name required error"
-            id="req_name"
-          >
-            Please enter your name.
-          </p>
           <p>Mobile Number</p>
           <input
             class="input_field"
@@ -51,17 +43,17 @@
             </option>
           </select>
           <br />
-          <p>street Name</p>
+          <p>Address</p>
           <input
             class="input_field"
             type="text"
-            placeholder="StreetName"
+            placeholder="Address"
             v-model="StreetName"
-            testid="Street input"
-            id="Street"
+            testid="Address input"
+            id="Address"
           />
           <br />
-          <p>Building Number</p>
+          <!-- <p>Building Number</p>
           <input
             class="input_field"
             type="text"
@@ -70,8 +62,8 @@
             testid="Building input"
             id="Building"
           />
-          <br />
-          <p>Floor</p>
+          <br /> -->
+          <!-- <p>Floor</p>
           <input
             class="input_field"
             type="text"
@@ -80,7 +72,7 @@
             testid="Floor input"
             id="Floor"
           />
-          <br />
+          <br /> -->
           <p>Creidt Card</p>
           <input
             class="input_field"
@@ -95,16 +87,16 @@
           <p>Product Color</p> 
          <select v-model="color" class="color_select" testid="color input">
             <option
-              v-for="color in ProductColors"
-              :key="color.text"
-              :value="color.text"
+              v-for="Color in Colors.slice(0,this.Counter)"
+              :key="Color.text"
+              :value="Color.text"
             >
-              {{ color.text }}
+              {{ Color.text }}
             </option>
           </select>  
 
           <button
-            @click.prevent="buyProduct(), changePurchaseModalState()"
+            @click.prevent="Buy_Product(), changePurchaseModalState()"
             class="costum-btn justify-content-center"
             id="buy-btn"
             type="submit"
@@ -137,17 +129,22 @@ body {
 }
 
 div {
-  position: absolute;
+  position: fixed;
   display: block;
-  // right :10%;
-  left: 25%;
-  justify-content: center;
-  align-items: center;
-  width: 50vw;
-  height: 120vh;
+  // // right :10%;
+  // left: 25%;
+  // justify-content: center;
+  // align-items: center;
+  // width: 50vw;
+  // height: 120vh;
   // overflow-y: scroll;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 20;
+  // background-color: rgba(0, 0, 0, 0.5);
+  // z-index: 20;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.9);
+  // background-color: transparent;
 }
 /* .modal-overlay {
 //   position: fixed;
@@ -170,12 +167,13 @@ div {
   position: relative;
   z-index: 80;
   top: 0;
-  left: 0;
+  left: 25%;
   width: 50vw;
-  height: 120vh;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
+  // background-color:transparent;
   transition: opacity 0.3s ease;
-  overflow-y: scroll;
+  // overflow-y: scroll;
 }
 p {
   position: relative;
@@ -213,7 +211,7 @@ select {
   -moz-appearance: none;
   appearance: none;
   width: 80%;
-  background: url("../assets/arrow.png") 90% / 10% no-repeat;
+  background: url("../assets/arrow.png") 90% / 5% no-repeat;
   background-color: rgba(0, 0, 0, 0.8);
 }
 button {
@@ -229,6 +227,8 @@ button {
   cursor: pointer;
   transition-duration: 0.3s;
   border-width: 0;
+  background-color:#fff44f;
+  color:black;
 }
 
 .fade-enter-active,
@@ -265,51 +265,24 @@ button {
 // }
 
 .highlight {
-  color: #0f1549;
+  color: #777009;
   display: inline-block;
 }
 .highlight:hover {
-  color: #0f1549;
+  color: #777009;
   cursor: pointer;
 }
 
-.invalid {
-  color: #bd3200;
-  text-align: left;
-}
-
-#signup-btn {
-  background-color: #0f1549;
-  max-width: 320px;
-  width: 100%;
-}
 button:hover {
-  background-color: #0f1549;
-}
-#birthdate {
-  label {
-    color: #88898c;
-    font-size: 0.9375em;
-    text-align: left;
-    margin-right: 15px;
-    margin-top: 15px;
-    padding-left: 5px;
-    display: block;
-  }
-  .month_select {
-    margin-left: 5%;
-    margin-right: 5%;
-    background: url("../assets/arrow.png") 90% / 12% no-repeat;
-    width: 40%;
-    background-color: #fff;
-  }
-  input {
-    width: 25%;
-  }
+  background-color: #777009;
 }
 
 h2 {
   margin-top: 5%;
+}
+strong{
+  color:#fff;
+  font-size:20px;
 }
 </style>
 <script>
@@ -330,7 +303,7 @@ export default {
         { text: "Beheira", value: "Beheira", disabled: false },
         { text: "BeniSuef", value: "BeniSuef", disabled: false },
         { text: "Cairo", value: "Cairo", disabled: false },
-        { text: "Dakahlia", value: "Kafr ElSheikh", disabled: false },
+        { text: "Dakahlia", value: "Dakahlia", disabled: false },
         { text: "Damietta", value: "Damietta", disabled: false },
         { text: "Faiyum", value: "Faiyum", disabled: false },
         { text: "Gharbia", value: "Gharbia", disabled: false },
@@ -357,13 +330,26 @@ export default {
       BuildingNumber:"0",
       FloorNumber:"",
       CreditCard:"",
+      Colors: [
+        { text: "Choose a color", value: "0", disabled: true },
+        { text: "",  disabled: false },
+        { text: "",  disabled: false },
+        { text: "",  disabled: false },
+        { text: "",  disabled: false },
+        { text: "",  disabled: false },
+        { text: "",  disabled: false },
+        { text: "",  disabled: false },
+        { text: "",  disabled: false },
+        { text: "",  disabled: false },
+        { text: "", disabled: false },
+      ],
+      Counter:0,
     };
   },
   components: {},
   methods:{
 
     Buy_Product(){
-      console.log("in popup",this.color)
       let Address=this.StreetName+this.city;
       let ProductInfo={
         productId:this.ProductId,
@@ -373,22 +359,27 @@ export default {
         creditCard:this.CreditCard
 
       }
+      
       this.$store.dispatch("Products/Buy_Product", ProductInfo);
     },
     changePurchaseModalState(){
-     console.log("in buyproduct",this.PurchaseModal);
 
       this.$store.dispatch("Products/togglePurchaseForm");
-     console.log(" buyproduct",this.PurchaseModal);
 
     }
   },
   computed:{
      ...mapGetters({
       ProductId: "Products/ProductId",
-      ProductColors:"Products/ProductColor",
+      ProductColor:"Products/ProductColor",
       PurchaseModal:"Products/PurchaseModal",
     }),
   },
+  mounted(){
+      for (const color in this.ProductColor) {
+          this.Colors[this.Counter].text = `${color}`;
+          this.Counter = this.Counter + 1;
+      }
+  }
 };
 </script>

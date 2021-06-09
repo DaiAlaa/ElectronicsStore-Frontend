@@ -1,6 +1,5 @@
 <template>
   <div class="conatiner login-form encor-ligh-theme px-0">
-    <buy-product></buy-product>
     <div class="row justify-content-center m-0">
       <div class="col-xl-4 col-lg-4 col-md-5 col-sm-8" align="center">
         <form>
@@ -22,14 +21,6 @@
           >
             Please enter your email.
           </p>
-          <p
-            v-if="invalid_email == true"
-            testid="email invalid error"
-            class="invalid"
-            id="invalid_email"
-          >
-            The email address you supplied is invalid.
-          </p>
           <input
             class="input_field"
             type="password"
@@ -46,14 +37,6 @@
             id="req_password"
           >
             Enter a password to continue.
-          </p>
-          <p
-            v-if="short_password == true"
-            class="invalid"
-            testid="password short error"
-            id="short_password"
-          >
-            Your password is too short.
           </p>
           <button
             @click.prevent="login()"
@@ -162,12 +145,10 @@ form {
 }
 </style>
 <script>
-// import BuyProduct from "@/components/BuyProduct.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "Login",
   components: {
-    // BuyProduct,
   },
   data: function () {
     return {

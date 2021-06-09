@@ -1,19 +1,33 @@
 <template>
   <body>
 
-    <div class="conatiner reset_body px-0" v-if="normal">
+    <div class="conatiner reset_body px-0" >
       <div class="row justify-content-center m-0">
         <div class="col-5" align="center">
           <h1>Password Reset</h1>
           <p>
-            Enter the <b> email address</b>
-            that you used to register. 
+            Enter the <b> new  password</b> 
           </p>
           <div id="email_label">
-            <label>Email address</label>
+            <label>Password</label>
           </div>
           <br />
-          <input type="text" id="email" v-model="email" testid="email input" />
+<input
+            class="input_field"
+            type="password"
+            placeholder="Password"
+            v-model="newPassword"
+            testid="password input"
+            id="password"
+          />
+          <input
+            class="input_field"
+            type="password"
+            placeholder="RepeatPassword"
+            v-model="newPasswordRepeat"
+            testid="password input"
+            id="password"
+          />
           <p
             class="invalid"
             id="req_error"
@@ -25,23 +39,11 @@
           <button
             class="costum-btn"
             id="send-btn"
-            @click.prevent="Forget_Password()"
+            @click.prevent="Reset_Password()"
             testid="forget password button"
           >
             send
           </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="conatiner reset_body px-0" v-if="submitted" id="submitted">
-      <div class="row justify-content-center m-0">
-        <div class="col-6" align="center">
-          <h1>Password Reset</h1>
-          <p>
-            A message has been sent to you by email with instructions on how to
-            reset your password.
-          </p>
         </div>
       </div>
     </div>
@@ -124,6 +126,7 @@ h1 {
 }
 </style>
 <script>
+import { mapGetters } from 'vuex';
 /**
  * Update password if user forget it
  * @displayName Update Password
@@ -132,41 +135,26 @@ h1 {
 export default {
   data: function() {
     return {
-      isNormal: true,
-      isError: false,
-      isSubmitted: false,
-      email: ""
+      newPassword:"",
+      newPasswordRepeat: "",
     };
   },
   methods: {
-    /**
-     * update user's password
-     * @public This is a public method
-     * @param {String} email email of user want to reset his password
-     */
-    Forget_Password() {
-      if (this.email == "") {
-        this.isNormal = true;
-        this.isError = true;
-        this.isSubmitted = false;
-      } else {
-        this.isNormal = false;
-        this.isSubmitted = true;
-        this.isError = false;
-        this.$store.dispatch("Authorization/reset", { email: this.email });
-      }
+    Reset_Password() {
+ 
+        let ResetInfo={
+            email:this.ResetMail,
+            newPassword:this.newPassword,
+            newPasswordRepeat:this.newPasswordRepeat
+        }
+        this.$store.dispatch("Authorization/reset_password", ResetInfo);
+
     }
   },
   computed: {
-    normal: function() {
-      return this.isNormal;
-    },
-    error: function() {
-      return this.isError;
-    },
-    submitted: function() {
-      return this.isSubmitted;
-    }
+ ...mapGetters({
+     ResetMail:"Authorization/ResetMail"
+ })
   }
 };
 </script>

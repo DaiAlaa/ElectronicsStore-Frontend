@@ -12,7 +12,7 @@
         <div class="child">
           <!-- <div class="grandchild"> -->
             <!-- <div class="info"> -->
-              <h2>Successful Purchase</h2>
+              <h2>Successfully Added Product</h2>
 
               <button
                 class="closebutton"
@@ -76,7 +76,7 @@ div {
   left: 25vw;
   width: 50vw;
   height: 50vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(197, 195, 81, 0.7);
   // display: table;
   transition: opacity 0.3s ease;
   overflow: hidden;
@@ -149,7 +149,7 @@ button:focus {
 }
 .closebutton {
   position: relative;
-  color: white;
+  color: black;
   background-color: transparent;
   border-color: transparent;
   margin: 20px;

@@ -10,7 +10,7 @@
         {{ Username | shorten}}
         <i class="fa fa-user me"></i>
     </button>
-    <button class="logout" v-if="GetStatus == 'success'">
+    <button class="logout" v-if="GetStatus == 'success'" @click="logout()">
         LOG OUT
     </button>
     <router-link to="/AddProduct" v-if="UserRole == 'Admin' || UserRole == 'Employee'">
@@ -262,6 +262,9 @@ export default {
         this.searchResults.length = 0;
         this.notFound = false;
       }
+    },
+    logout(){
+       this.$store.dispatch("Authorization/logout");
     }
   },
   mounted() {

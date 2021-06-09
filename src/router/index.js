@@ -14,6 +14,7 @@ import Statistics from "../views/Statistics.vue";
 import OrdersDetails from "../views/OrdersDetails.vue";
 import AddNewAdmin from "../views/AddNewAdmin.vue";
 import ForgetPassword from "../views/ForgetPassword.vue";
+import ResetPassword from "../views/ResetPassword.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -86,6 +87,11 @@ const routes = [
     path: "/ForgetPassword",
     name: "ForgetPassword",
     component: ForgetPassword
+  },
+  {
+  path: "/ResetPassword",
+    name: "ResetPassword",
+    component: ResetPassword
   },
 ];
 

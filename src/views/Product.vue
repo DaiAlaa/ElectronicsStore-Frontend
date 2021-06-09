@@ -11,7 +11,7 @@
         {{ Username | shorten}}
         <i class="fa fa-user me"></i>
     </button>
-    <button class="logout" v-if="GetStatus == 'success'">
+    <button class="logout" v-if="GetStatus == 'success'" @click="logout()">
         LOG OUT
     </button>
       <SuccessfulPurchase v-if="SuccessPurchase"/>
@@ -380,6 +380,9 @@ export default {
     },
     setRate(){
       this.$store.dispatch("Products/setRate", this.ProductId + "&rate=" + this.Rate);
+    },
+    logout(){
+       this.$store.dispatch("Authorization/logout");
     }
   },
    components: {
