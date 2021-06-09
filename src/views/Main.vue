@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <router-link to="/">
-      <img class="logo" src="../assets/GLogo.jpeg" alt="logo" />
+      <img class="logo" src="../assets/newlogo2.png" alt="logo" />
     </router-link>
     <router-view class="child"></router-view>
   </div>
@@ -19,9 +19,9 @@
 }
 .logo {
   width: 20%;
-  height: 20%;
+  height:27%;
   position: absolute;
-  margin-left: -49%;
+  margin-left: -52%;
   border-radius: 50%;
   // margin-top: 2%;
 }

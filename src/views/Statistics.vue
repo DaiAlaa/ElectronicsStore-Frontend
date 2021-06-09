@@ -1,12 +1,12 @@
 <template>
     <div class="container">
-    <div class="row mt-5">
+    <div class="row">
       <div class="col">
           <h1 class="text-center">Categories total profit and counts</h1>
       </div>
     </div>
     <div class="barchart" id="artistbarchart" testid="artistbarchart">
-      <Chart />
+      <chart />
     </div>
         <!-- <div class="row mt-5" v-if="arrTotal.length > 0">
       <div class="col">

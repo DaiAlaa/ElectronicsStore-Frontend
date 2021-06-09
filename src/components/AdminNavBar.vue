@@ -5,11 +5,11 @@
         Control Users
       </button>
     </router-link>
-    <router-link to="/AdminPanel">
+    <!-- <router-link to="/AdminPanel/Statistics">
       <button class="Statistics" v-bind:class="{ Statistics2: route2 }" @click="ShowStats()">
         Statistics
       </button>
-    </router-link>
+    </router-link> -->
     <router-link to="/AdminPanel/AddNewAdmin">
       <button class="newAdmin" v-bind:class="{ newAdmin2: route3 }">
         Add new admin
@@ -38,7 +38,7 @@
   border-radius: 20px;
   width: 10%;
   height: 6%;
-  margin-left: -12%;
+  margin-left: -5%;
   margin-top: 2%;
   position: absolute;
   background-color: white;
@@ -95,7 +95,7 @@
   width: 11%;
   height: 6%;
   margin-top: 2%;
-  margin-left: 8%;
+  margin-left: -5%;
   position: absolute;
   background-color: white;
   color: #161516;

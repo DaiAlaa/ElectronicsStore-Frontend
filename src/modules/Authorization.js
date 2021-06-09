@@ -56,6 +56,7 @@ export default {
           ///////////////////
           const token = response.data.access_token;
           localStorage.setItem("X-token", token);
+          localStorage.setItem("Authorization", token);
           axios.defaults.headers.common["Authorization"] = token;
           store.dispatch("Authorization/get_user", true);
         })

@@ -33,6 +33,7 @@
               v-for="category in Categories"
               :key="category._id"
               :name="category.name"
+              :value="category._id"
               :categoryId="category._id"
             >
               {{ category.name }}
@@ -248,7 +249,7 @@ export default {
       };
     },
     Add_Product(){
-      console.log("p1 vue",this.selectedphoto);
+      console.log("p1 vue",this.categoryId);
       let ProductInfo={
         creatorId:this.UserID,
         categoryId:this.categoryId,

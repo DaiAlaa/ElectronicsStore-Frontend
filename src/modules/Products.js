@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import router from "../router/index";
 export default {
   namespaced: true,
   state: {
@@ -232,6 +232,7 @@ export default {
         .then((response) => {
           let RateRespons = response.data;
           commit("setRateMutation", RateRespons);
+          router.Replace("/Product");
         })
         .catch((error) => {
           console.log(error);

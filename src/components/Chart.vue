@@ -130,7 +130,7 @@ export default {
                 labels: ["category"],
                 datasets: [
                     {
-                        label: "Number of Followers",
+                        label: ["total","count"],
                         backgroundColor: "#172847",
                         pointBackgroundColor: "white",
                         borderWidth: 1,
