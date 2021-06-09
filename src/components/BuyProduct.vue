@@ -350,9 +350,7 @@ export default {
   methods:{
 
     Buy_Product(){
-      console.log("in popup",this.color);
       let Address=this.StreetName+this.city;
-      console.log("in popup",this.ProductId);
       let ProductInfo={
         productId:this.ProductId,
         color:this.color,
@@ -361,14 +359,12 @@ export default {
         creditCard:this.CreditCard
 
       }
-      console.log(ProductInfo);
+      
       this.$store.dispatch("Products/Buy_Product", ProductInfo);
     },
     changePurchaseModalState(){
-     console.log("in buyproduct",this.PurchaseModal);
 
       this.$store.dispatch("Products/togglePurchaseForm");
-     console.log(" buyproduct",this.PurchaseModal);
 
     }
   },
@@ -384,7 +380,6 @@ export default {
           this.Colors[this.Counter].text = `${color}`;
           this.Counter = this.Counter + 1;
       }
-      console.log("colors",this.Colors);
   }
 };
 </script>

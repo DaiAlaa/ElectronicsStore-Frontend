@@ -6,6 +6,7 @@ export default {
     AllUsers: [],
     userRespons: 0,
     status: "",
+    msg: ""
   },
   mutations: {
     setAllUsers(state, Users) {
@@ -14,6 +15,9 @@ export default {
     isAdded(state, msg) {
       state.status = msg;
     },
+    setA(state, msg){
+      state.msg = msg
+    }
   },
   actions: {
     showAllUsers({ commit }) {
@@ -33,17 +37,19 @@ export default {
           console.log(error);
         });
     },
-    DeleteUser(userId) {
+    DeleteUser({commit}, userId) {
       axios
-        .delete("http://localhost:7000/Admin/delete-user/" + userId)
+        .delete("http://localhost:7000/Admin/delete-user?userId=" + userId)
         .then(() => {
-          store.dispatch("Users/showAllUsers");
+          commit("setA", "a");
+          store.dispatch("Users/showAllUsers"); 
         })
         .catch((error) => {
           console.log(error);
         });
     },
     CreateAdminEmplyee({ commit, state }, user) {
+      console.log("yarab");
       axios
         .post("http://localhost:7000/Admin/create-user", {
           email: user.email,
@@ -55,11 +61,13 @@ export default {
           address: user.address,
         })
         .then((response) => {
+          console.log("wsl");
           state.userRespons = response.data;
           commit("isAdded", "success");
           console.log("status : ", state.status);
         })
         .catch((error) => {
+          console.log("wsllll");
           commit("isAdded", "failed");
           console.log(error);
           console.log("status : ", state.status);

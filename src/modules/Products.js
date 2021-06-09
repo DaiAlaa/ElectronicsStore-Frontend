@@ -17,6 +17,8 @@ export default {
     SuccessProductAddition:true,
     Orders: [],
     GetStats:[],
+    ProductRate: 0,
+    RateRespons: "",
   },
   mutations: {
     setUserCategories(state, Categories) {
@@ -60,6 +62,12 @@ export default {
     },
     setStats(state,Stats){
       state.GetStats=Stats;
+    },
+    setProductRate(state, rate){
+      state.ProductRate = rate;
+    },
+    setRateMutation (state, RateRespons){
+      state.RateRespons = RateRespons;
     }
   },
   actions: {
@@ -107,7 +115,8 @@ export default {
           commit("setProductDes", Product.description);
           commit("setProductImage", Product.imageId);
           commit("setProductColors",Product.colors);
-          console.log(Product.colors.red)
+          commit("setProductRate",Product.rate);
+          console.log("kooooo" , Product.rate);
         })
         .catch((error) => {
           console.log(error);
@@ -197,17 +206,30 @@ export default {
     },
     showOrders({ commit }) {
       axios
-        .get("http://localhost:7000/order/get?pageNumber=1&pageSize=10")
+        .get("http://localhost:7000/order/get?pageNumber=1&pageSize=20")
         .then((response) => {
           let Orders = response.data;
           if (response.status != 200) {
             Orders = [];
           }
-          commit("setUserCategories", Orders);
+          commit("setOrders", Orders);
         })
         .catch((error) => {
           let Orders = [];
-          commit("setUserCategories", Orders);
+          commit("setOrders", Orders);
+          console.log(error);
+        });
+    },
+    setRate({ commit}, rate) {
+      console.log("rate : ", rate);
+      axios
+        .post("http://localhost:7000/product/rate?productId=" + rate, {
+        })
+        .then((response) => {
+          let RateRespons = response.data;
+          commit("setRateMutation", RateRespons);
+        })
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -248,5 +270,6 @@ export default {
     BuyProduct:state=>state.BuyProduct,
     SuccessProductAddition:state=>state.SuccessProductAddition, 
     GetStats:state=>state.GetStats,
+    ProductRate:state=>state.ProductRate, 
   }
 };

@@ -20,24 +20,18 @@
       class="row record border-bottom border-secondary"
       v-for="user in AllUsers"
       :key="user._id"
-      :userRole="user.role"
-      :userId="user._id"
-      :userEmail="user.email"
-      :userName="user.name"
-      :userMobile="user.mobileNumber"
-      :userAddress="user.address"
     >
       <div class="col">
-        <h4 class="head1">{{ userName }}</h4>
+        <h4 class="head1">{{ user.name }}</h4>
       </div>
       <div class="col">
-        <h4 class="head2">{{ userEmail }}</h4>
+        <h4 class="head2">{{ user.email }}</h4>
       </div>
       <div class="col">
-        <h4 class="head3">{{ userId }}</h4>
+        <h4 class="head3">{{ user._id }}</h4>
       </div>
       <div class="col">
-        <button class="delete" @click="deleteUser(userId)">Delete</button>
+        <button class="delete" @click="deleteUser(user._id)">Delete</button>
       </div>
     </div>
   </div>
@@ -70,7 +64,7 @@ h3 {
 }
 .head2 {
   position: absolute;
-  margin-left: 15%;
+  margin-left: 8%;
 }
 .head3 {
   position: absolute;
@@ -114,6 +108,7 @@ export default {
   methods: {
     deleteUser(userId) {
       this.$store.dispatch("Users/DeleteUser", userId);
+      console.log("usertd kkk " , userId)
     },
   },
 };

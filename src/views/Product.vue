@@ -1,20 +1,20 @@
 <template>
     <div class="productPage">
       <BuyProduct v-if="PurchaseModal"/>
-      <router-link to="/SignUp">
-        <button class="sign">
-          SIGN UP
-        </button>
-      </router-link>
-      <router-link to="/Login">
-        <button class="log">
-          LOG IN
-        </button>
-      </router-link>
+      <router-link to="/SignUp" v-if="GetStatus == '' || GetStatus == 'faild'">
+      <button class="sign">SIGN UP</button>
+    </router-link>
+    <router-link to="/Login" v-if="GetStatus == '' || GetStatus == 'faild'">
+      <button class="log">LOG IN</button>
+    </router-link>
+    <button class="userName" v-if="GetStatus == 'success'">
+        {{ Username | shorten}}
+        <i class="fa fa-user me"></i>
+    </button>
+    <button class="logout" v-if="GetStatus == 'success'" @click="logout()">
+        LOG OUT
+    </button>
       <SuccessfulPurchase v-if="SuccessPurchase"/>
-      <!-- <button class="userName">
-        user name
-      </button> -->
     <hr />
     <div class="container">
       <div class="row row1" v-if="this.show">
@@ -34,47 +34,93 @@
           <p class="productPrice"> {{ this.price }} 
             <span class="productPrice"> $ </span>
           </p>
-          <h5 class="arrtibute">Add review :</h5>
+          <h5 class="arrtibute">Reviews :</h5>
           <span
-            @click="isActive1 = !isActive1"
             class="fa fa-star star"
             v-bind:class="{ checked: isActive1 }"
           ></span>
           <span
-            @click="isActive2 = !isActive2"
             class="fa fa-star star"
             v-bind:class="{ checked: isActive2 }"
           ></span>
           <span
-            @click="isActive3 = !isActive3"
             class="fa fa-star star"
             v-bind:class="{ checked: isActive3 }"
           ></span>
           <span
-            @click="isActive4 = !isActive4"
             class="fa fa-star star"
             v-bind:class="{ checked: isActive4 }"
           ></span>
           <span
-            @click="isActive5 = !isActive5"
             class="fa fa-star star"
             v-bind:class="{ checked: isActive5 }"
           ></span>
+          <hr>
+          <h5 class="arrtibute">Add your review :</h5>
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
+              <input
+                type="radio"
+                class="form-check-input option2"
+                name="optradio"
+                value="1"
+                v-model="Rate"
+              />
+              1
+            </label>
+          </div>
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
+              <input
+                type="radio"
+                class="form-check-input option2"
+                name="optradio"
+                value="2"
+                v-model="Rate"
+              />
+              2
+            </label>
+          </div>
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
+              <input
+                type="radio"
+                class="form-check-input option2"
+                name="optradio"
+                value="3"
+                v-model="Rate"
+              />
+              3
+            </label>
+          </div>
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
+              <input
+                type="radio"
+                class="form-check-input option2"
+                name="optradio"
+                value="4"
+                v-model="Rate"
+              />
+              4
+            </label>
+          </div>
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
+              <input
+                type="radio"
+                class="form-check-input option2"
+                name="optradio"
+                value="5"
+                v-model="Rate"
+              />
+              5
+            </label>
+          </div>
+          <button @click="setRate()" class="addButton">  Add </button>
           <hr />
           <button class="buy" @click="OpenPurchaseForm()">Buy Now</button>
         </div>
-        
-        <!-- <div class="row row2">
-          <div class="col">
-            <img 
-              class="shop"
-              src="../assets/shop6.png"
-            />
-          </div>
-          <div class="col lets">
-            Let's go shopping!
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -86,7 +132,7 @@
 .sign {
   border: none;
   border-radius: 20px;
-  width: 6%;
+  width: 8%;
   height: 6%;
   margin-left: 34%;
   margin-top: 2%;
@@ -114,13 +160,27 @@
 .sign:hover, .log:hover {
   height: 6.5%;
 }
+.logout {
+  border: none;
+  border-radius: 20px;
+  width: 8%;
+  height: 6%;
+  margin-top: 2%;
+  margin-left: 30%;
+  position: absolute;
+  background-color: white;
+  color: #161516;
+  text-decoration: none;
+  outline: none;
+  font-weight: bold;
+}
 .userName {
   border: none;
   border-radius: 20px;
-  width: 8% auto;
-  height: 5%;
+  width: 125px;
+  height: 40px;
   margin-top: 2%;
-  margin-left: 52%;
+  margin-left: 39%;
   position: absolute;
   background: #313030;
   color: white;
@@ -128,6 +188,7 @@
   outline: none;
   padding-left: 15px;
   padding-right: 15px;
+  font-size: 18px;
 }
 .container {
   height: 100%;
@@ -156,7 +217,7 @@
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .productDes {
-  font-size: 18px;
+  font-size: 16px;
   color: white;
 }
 .productPrice{
@@ -197,6 +258,27 @@
   top:0%;
   z-index: 1000;
 }
+.option1 {
+  margin-bottom: 20px;
+  color: #fff44f;
+}
+// .option2 {
+//   margin-right: 10px;
+// }
+.addButton {
+  border: none;
+  color: #161516;
+  background-color: #fff44f;
+  width: 22%;
+  height: 5%;
+  margin-bottom: 5px;
+  margin-left: 30px;
+}
+.me {
+  font-size: 20px;
+  color: white;
+  margin-left: 2%;
+}
 // .row2 {
 //   width: 100%;
 //   height: 60.2%;
@@ -226,6 +308,7 @@ export default {
       image: "",
       show: false,
       Colors: [],
+      Rate: ""
     };
   },
   mounted() {
@@ -242,6 +325,35 @@ export default {
           this.Colors[i] = `${color}`;
           i = i + 1;
       }
+      if(this.ProductRate == 1)
+    { this.isActive1 = true;} 
+    else if (this.ProductRate == 2)
+    {
+      this.isActive1 = true;
+      this.isActive2 = true;
+    }
+    else if (this.ProductRate == 3)
+    {
+      this.isActive1 = true;
+      this.isActive2 = true;
+      this.isActive3 = true;
+    }
+    else if (this.ProductRate == 4)
+    {
+      this.isActive1 = true;
+      this.isActive2 = true;
+      this.isActive3 = true;
+      this.isActive4 = true;
+    }
+    else if (this.ProductRate == 5)
+    {
+      this.isActive1 = true;
+      this.isActive2 = true;
+      this.isActive3 = true;
+      this.isActive4 = true;
+      this.isActive5 = true;
+    }
+    console.log("gggg " , this.ProductRate);
       }, 300); 
   },
     computed: {
@@ -253,7 +365,11 @@ export default {
       ProductImage: "Products/ProductImage",
       PurchaseModal:"Products/PurchaseModal",
       ProductColor:"Products/ProductColor",
-      SuccessPurchase:"Products/SuccessPurchase"
+      SuccessPurchase:"Products/SuccessPurchase",
+      ProductRate: "Products/ProductRate",
+      GetStatus: "Authorization/GetStatus",
+      UserRole: "Authorization/UserRole",
+      Username: "Authorization/Username",
     })
   },
   methods:{
@@ -261,11 +377,23 @@ export default {
       console.log("before SP",this.Successpurchase);
       this.$store.dispatch("Products/togglePurchaseForm");
       console.log("after",this.PurchaseModal);
+    },
+    setRate(){
+      this.$store.dispatch("Products/setRate", this.ProductId + "&rate=" + this.Rate);
+    },
+    logout(){
+       this.$store.dispatch("Authorization/logout");
     }
   },
    components: {
      BuyProduct,
      SuccessfulPurchase
-   }
+   },
+   filters: {
+    shorten: function (value) {
+      if (value && value.length > 7) return value.substring(0, 7) + "..";
+      else return value;
+    },
+  },
 }
 </script>

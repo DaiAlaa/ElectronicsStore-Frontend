@@ -1,32 +1,31 @@
 <template>
-  <div>
+  <div class="main">
     <h1>Orders Details:</h1>
     <div class="row record border-bottom" 
-      v-for="order in Orders1"
-      :key="order._id"
-      :productName="order.product.name"
-      :productPrice="order.product.price"
-      :productImage="order.product.imageId"
-      :customerName="order.customer.name"
-      :date="order.updatedAt"
+      v-for="(order, index) in Orders1"
+      :key="index"
+      :class="{ record2: index % 2 == 1 }"
     >
       <div class="col">
         <img
           class="productImage"
-          :src="'http://localhost:7000/image/get?imageId=' + productImage"
+          :src="'http://localhost:7000/image/get?imageId=' + order.product.imageId"
           alt="Card image"
           id="cardimg"
         />
       </div>
       <div class="col info">
-        <h3>{{customerName + " bought " + productName}}</h3>
-        <h4>{{"Price: " + productPrice + "$"}}</h4>
-        <h4>{{"At: " + date.slice(23, 14) }}</h4>
+        <h3>{{order.customer.name + " bought " + order.product.name}}</h3>
+        <h4>{{"Price: " + order.product.price + "$"}}</h4>
+        <h4>{{"At: " + order.updatedAt.slice(0, 10)}}</h4>
       </div>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
+.main {
+  padding-bottom: 50px;
+}
 h1 {
   margin-top: 13%;
   color: white;
@@ -42,7 +41,20 @@ h1 {
   background: linear-gradient(
     to right ,
     #313030,
-    #F0F2F0
+    #bebebe
+  );
+  margin-left: 25%;
+  color: white;
+}
+.record2 {
+  width: 50%;
+  height: 120px;
+  padding-top: 6px;
+  // background: #313030;
+  background: linear-gradient(
+    to left ,
+    #313030,
+    #bebebe
   );
   margin-left: 25%;
   color: white;
@@ -51,8 +63,8 @@ h1 {
   text-align: left;
 }
 .productImage {
-  width: 26%;
-  height: 96%;
+  width: 110px;
+  height: 95%;
   border-radius: 50%;
 }
 .info {
