@@ -2,6 +2,7 @@
   <div class="conatiner product-details encor-ligh-theme px-0">
     <div class="row justify-content-center m-0">
       <div class="col-xl-4 col-lg-4 col-md-5 col-sm-8" align="center">
+        <!-- <SuccessfulProductAddition v-if="SuccessProductAddition" /> -->
         <h2>Add your product's details</h2>
         <form>
           <p>product name</p>
@@ -25,14 +26,27 @@
           />
           <br />
 
-          <p>discreption</p>
+          <p>Category</p>
+           <select v-model="categoryId" class="City_select" testid="category input">
+            <option
+              v-for="category in Categories"
+              :key="category._id"
+              :name="category.name"
+              :categoryId="category._id"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+                  
+          <br />
+            <p>Description</p>
           <input
             class="input_field"
             type="text"
-            placeholder="Discreption"
-            v-model="discreption"
-            testid="discreption input"
-            id="discreption"
+            placeholder="Description"
+            v-model="description"
+            testid="description input"
+            id="description"
           />
           <br />
           <p>each color amount</p>
@@ -56,7 +70,7 @@
             id="photo"
           />
           <button
-            class="uploadfile"
+            class="uploadfile costum-btn"
             @click="$refs.inputfile.click()"
           >
             Add product's photo
@@ -67,7 +81,7 @@
 
           <br />
           <button
-            @click.prevent="AddProduct()"
+            @click="Add_Product()"
             class="costum-btn justify-content-center"
             id="product-btn"
             type="submit"
@@ -77,7 +91,9 @@
           </button>
         </form>
       </div>
+
     </div>
+    
   </div>
   <!-- Sign Up form -->
 </template>
@@ -90,7 +106,7 @@ body {
   padding: 0px;
 }
 .product-details {
-  background-color: whitesmoke;
+  background-color: #161516;
   height: 100%;
   width: 100%;
   background-size: cover;
@@ -99,19 +115,24 @@ body {
 }
 h2 {
   margin-top: 5%;
+  color:whitesmoke;
 }
 form {
   height: calc(120vh);
+}
+p{
+  color:whitesmoke;
+  font-size:30px;
 }
 input {
   height: 3em;
   padding: 0.625em 0.625em 0.625em;
   border-radius: 2px;
   border: 1px solid #dfe0e6;
-  color: #1c1c1f;
+  color: whitesmoke;
   width: 100%;
   margin-bottom: 16px;
-  // background-color: transparent;
+  background-color: transparent;
 }
 .costum-btn {
   font-size: 14px;
@@ -122,7 +143,7 @@ input {
   margin-top: 31px;
   margin-left: auto;
   margin-right: auto;
-  color: #fff;
+  color: black;
   text-decoration: none;
   font-weight: 700;
   text-align: center;
@@ -146,62 +167,40 @@ input {
 }
 
 #product-btn {
-  background-color: #0f1549;
+  background-color: #fff44f;
   max-width: 320px;
   width: 100%;
 }
 #product-btn:hover {
-  background-color: #0f1549;
+  background-color: #fff44f;
 }
 .uploadfile {
-  // position: absolute;
-  // top: 70%;
-  // right: 0;
-  appearance: none;
-  outline: none;
-  border: none;
-  background: none;
-  cursor: pointer;
-  margin: 20px;
-  // height: 15%;
-  // width: 17%;
-  background: linear-gradient(to right, #f27914, #9c28d0);
-  border-radius: 26px;
-  border-color: transparent;
-  color: #fff;
-  font-size: 90%;
-  font-weight: 700;
-  outline: none;
-  box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
-  transition: 0.4s ease-out;
-  z-index: 10;
+  background: #fff44f;
 }
-.uploadbutton {
-  position: relative;
-  // top: 70%;
-  right: 0;
+
+select {
+  border-radius: 2px;
+  border: 1px solid #dfe0e6;
+  color: black;
+  font-size: 0.9375em;
+  height: 3em;
+  padding: 0.625em 0.625em 0.625em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
-  outline: none;
-  border: none;
-  background: none;
-  cursor: pointer;
-  margin: 20px;
-  // height: 15%;
-  // width: 17%;
-  background: linear-gradient(to right, #f27914, #9c28d0);
-  border-radius: 26px;
-  border-color: transparent;
-  color: #fff;
-  font-size: 90%;
-  font-weight: 700;
-  outline: none;
-  box-shadow: 3px 3px rgba(0, 0, 0, 0.4);
-  transition: 0.4s ease-out;
-  z-index: 0;
+  width: 100%;
+  background: url("../assets/arrow.png") 90% / 5% no-repeat;
+  background-color: transparent;
+}
+.SuccessfulProductAddition{
+  position: absolute;
+  top:0%;
+  z-index: 1000;
 }
 </style>
 <script>
 import { mapGetters } from "vuex";
+// import SuccessfulProductAddition from "@/components/SuccessfulProductAddition.vue";
 export default {
   name: "AddProduct",
   data: function () {
@@ -209,7 +208,11 @@ export default {
       choosebutton: false,
       name:"",
       price:"",
-      image:"",
+      //    image: {
+      //   size: "",
+      //   height: "",
+      //   width: ""
+      // },
       description:"",
       colors:{
         "black":"5",
@@ -217,56 +220,44 @@ export default {
         "white":"9"
 
       },
+      amount:"",
+      selectedphoto:null,
+      data:{},
+      categoryId:"60bef33e55fac81818313490",
     };
   },
   setup() {},
-  components: {},
+  components: {
+    // SuccessfulProductAddition,
+  },
   methods:{
-    OnPhotoUpload(event) {
+     OnPhotoUpload(event) 
+{
       this.selectedphoto = event.target.files[0];
       if (
         !this.selectedphoto ||
         this.selectedphoto.type.indexOf("image/") !== 0
       )
         return;
-      this.image.size = this.selectedphoto.size;
       let reader = new FileReader();
       reader.readAsDataURL(this.selectedphoto);
+      let img = new Image();
       reader.onload = evt => {
-        let img = new Image();
-        // img.onload = () => {
-        //   this.image.width = img.width;
-        //   this.image.height = img.height;
-        // };
         img.src = evt.target.result;
       };
-      this.persist(this.selectedphoto);
     },
-    persist(image) {
-      const data = new FormData();
-      data.append("image", image);
-      // Send the image to the API (e.g., with a Vuex action)
-    },
-    // Upload_Image() {
-    //   let payload = {
-    //     selphoto: this.selectedphoto,
-    //     width: this.image.width,
-    //     height: this.image.height,
-    //     belongs_to: "artist",
-    //     artist_id: this.Artist_ID
-    //   };
-    //   this.$store.dispatch("ArtistProperties/UploadPhoto", payload);
-    // },
     Add_Product(){
+      console.log("p1 vue",this.selectedphoto);
       let ProductInfo={
-        creatorId:this.userid,
+        creatorId:this.UserID,
         categoryId:this.categoryId,
         name:this.name,
         price:this.price,
-        image:this.this.selectedphoto, //should be form data
+        file:this.selectedphoto, //should be form data
         description:this.description,
         colors:this.colors
       }
+      console.log("p vue",ProductInfo);
       this.$store.dispatch("Products/Add_Product", ProductInfo);
     }
   },
@@ -274,7 +265,9 @@ export default {
      ...mapGetters({
       ProductId: "Products/ProductId",
       Categories:"Products/Categories",
-      userid:"Authorization/userid",
+      UserID:"Authorization/UserID",
+      // SuccessProductAddition:"Products/SuccessProductAddition",
+
       // imageID:""
     }),
   },

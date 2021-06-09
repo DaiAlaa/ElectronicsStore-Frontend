@@ -58,6 +58,7 @@
       />
     </div>
     <p class="notFound" v-if="SearchValue != '' && searchResults.length == 0 && this.notFound">Not Found</p>
+    <button @click="logout()"></button>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -238,6 +239,9 @@ export default {
         this.searchResults.length = 0;
         this.notFound = false;
       }
+    },
+    logout(){
+       this.$store.dispatch("Authorization/logout");
     }
   },
   mounted() {

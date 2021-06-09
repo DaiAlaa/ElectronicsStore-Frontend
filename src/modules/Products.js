@@ -13,9 +13,10 @@ export default {
     searchResults: [],
     PurchaseModal:false,
     BuyProduct:false,
-    SuccessPurchase:true,
-    SuccessProductAddition:false,
+    SuccessPurchase:false,
+    SuccessProductAddition:true,
     Orders: [],
+    GetStats:[],
   },
   mutations: {
     setUserCategories(state, Categories) {
@@ -48,8 +49,8 @@ export default {
     setSuccessPurchase(state){
       state.SuccessPurchase=!state.SuccessPurchase;
     },
-    setSuccessAddition(state,SuccessProductAddition){
-      state.SuccessProductAddition=SuccessProductAddition;
+    setSuccessAddition(state){
+      state.SuccessProductAddition=!state.SuccessProductAddition;
     },
     setProductColors(state,ProductColor){
       state.colors=ProductColor;
@@ -57,6 +58,9 @@ export default {
     setOrders(state, Orders) {
       state.Orders = Orders;
     },
+    setStats(state,Stats){
+      state.GetStats=Stats;
+    }
   },
   actions: {
     showUserCategories({ commit }) {
@@ -134,38 +138,51 @@ export default {
       // });
     },
     Buy_Product({commit},PurchaseInfo){
+      console.log("in js",PurchaseInfo.productId);
+      axios.defaults.headers.common["Authorization"] = localStorage.getItem("Authorization");
       axios.
-      post("http://localhost:7000/order/create",{
-        productId:PurchaseInfo.ProductId,
+      post("http://localhost:7000/order/create"
+        ,{
+        productId:PurchaseInfo.productId,
         color:PurchaseInfo.color,
         address:PurchaseInfo.address,
         phone:PurchaseInfo.MobileNumber,
         creditCard:PurchaseInfo.CreditCard
       })
+      
       .then((response) => {
         commit("setSuccessPurchase");
         console.log("Nerdeen", response);
       })
       .catch((error) => {
+        console.log("in js error",PurchaseInfo.productId);
         console.log(error);
       });
     },
     Add_Product({commit},ProductInfo){
-      axios.
-      post("http://localhost:7000/order/create",{
+      console.log("p js",ProductInfo);
+      const file = new FormData();
+      file.append("file", ProductInfo.file);
+      console.log("p3 js",{
         creatorId:ProductInfo.creatorId,
-        categoryId:ProductInfo.categoryId,
+        categoryId:"60bef33e55fac81818313490",
         name:ProductInfo.name,
         price:ProductInfo.price,
-        imageId:ProductInfo.imageId,
+        file:file,
         description:ProductInfo.description,
-        colors:ProductInfo.colors
+        colors:JSON.stringify( ProductInfo.colors)
+        });
+      axios({
+        method:"post",
+        url:"http://localhost:7000/product/create?creatorId="+ProductInfo.creatorId+"&categoryId="+ProductInfo.categoryId+"&name="+ProductInfo.name+"&price="+ProductInfo.price+"&description="+ProductInfo.description+"&colors="+JSON.stringify( ProductInfo.colors),
+        data:file
       })
       .then((response) => {
         commit("setSuccessAddition",true);
         console.log("Nerdeen", response);
       })
       .catch((error) => {
+        console.log("Nerdeen", error);
         console.log(error);
       });
     },
@@ -194,6 +211,26 @@ export default {
           console.log(error);
         });
     },
+    ShowStats({commit}){
+      axios
+        .get("http://localhost:7000/order/getStats")
+        .then((response) => {
+          let Stats = response.data;
+          if (response.status != 200) {
+            Stats = [];
+          }
+          console.log("in p",Stats);
+          commit("setStats", Stats);
+        })
+        .catch((error) => {
+          let Stats = [];
+          commit("setStats", Stats);
+          console.log(error);
+        });
+    }
+    // Upload_Photo({commit}){
+
+    // }
    },
   getters: {
     Categories: state => state.userCategories,
@@ -210,5 +247,6 @@ export default {
     SuccessPurchase:state=>state.SuccessPurchase,
     BuyProduct:state=>state.BuyProduct,
     SuccessProductAddition:state=>state.SuccessProductAddition, 
+    GetStats:state=>state.GetStats,
   }
 };
