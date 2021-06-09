@@ -24,7 +24,7 @@
   border-radius: 20px;
   width: 10%;
   height: 6%;
-  margin-left: -12%;
+  margin-left: -10%;
   margin-top: 2%;
   position: absolute;
   background-color: #161516;
@@ -38,7 +38,7 @@
   border-radius: 20px;
   width: 10%;
   height: 6%;
-  margin-left: -5%;
+  margin-left: -10%;
   margin-top: 2%;
   position: absolute;
   background-color: white;
@@ -81,7 +81,7 @@
   width: 11%;
   height: 6%;
   margin-top: 2%;
-  margin-left: 8%;
+  margin-left: 0%;
   position: absolute;
   background-color: #161516;
   color: white;
@@ -95,7 +95,7 @@
   width: 11%;
   height: 6%;
   margin-top: 2%;
-  margin-left: -5%;
+  margin-left: 0%;
   position: absolute;
   background-color: white;
   color: #161516;
