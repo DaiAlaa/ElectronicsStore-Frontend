@@ -34,6 +34,9 @@ export default {
     },
     Reset_Mail(state,Mail){
       state.Mail=Mail;
+    },
+    auth_request(state){
+      state.status = "loading";
     }
   },
   actions: {

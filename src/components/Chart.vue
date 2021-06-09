@@ -148,6 +148,7 @@ export default {
                     };
     },
     async created() {
+    console.log("there");    
     await this.$store.dispatch("Products/ShowStats");
     console.log("here");
      this.datacollection.datasets[0].data = this.GetStats;
