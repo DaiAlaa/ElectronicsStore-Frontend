@@ -1,8 +1,9 @@
 <template>
   <div class="conatiner product-details encor-ligh-theme px-0">
+     <SuccessfulProductAddition v-if="SuccessProductAddition" />
     <div class="row justify-content-center m-0">
       <div class="col-xl-4 col-lg-4 col-md-5 col-sm-8" align="center">
-        <!-- <SuccessfulProductAddition v-if="SuccessProductAddition" /> -->
+       
         <h2>Add your product's details</h2>
         <form>
           <p>product name</p>
@@ -193,14 +194,14 @@ select {
   background-color: transparent;
 }
 .SuccessfulProductAddition{
-  position: absolute;
+  position: fixed;
   top:0%;
   z-index: 1000;
 }
 </style>
 <script>
 import { mapGetters } from "vuex";
-// import SuccessfulProductAddition from "@/components/SuccessfulProductAddition.vue";
+import SuccessfulProductAddition from "@/components/SuccessfulProductAddition.vue";
 export default {
   name: "AddProduct",
   data: function () {
@@ -228,7 +229,7 @@ export default {
   },
   setup() {},
   components: {
-    // SuccessfulProductAddition,
+    SuccessfulProductAddition,
   },
   methods:{
      OnPhotoUpload(event) 
@@ -266,7 +267,7 @@ export default {
       ProductId: "Products/ProductId",
       Categories:"Products/Categories",
       UserID:"Authorization/UserID",
-      // SuccessProductAddition:"Products/SuccessProductAddition",
+      SuccessProductAddition:"Products/SuccessProductAddition",
 
       // imageID:""
     }),

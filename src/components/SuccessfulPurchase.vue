@@ -76,7 +76,7 @@ div {
   left: 25vw;
   width: 50vw;
   height: 50vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(197, 195, 81, 0.7);
   // display: table;
   transition: opacity 0.3s ease;
   overflow: hidden;

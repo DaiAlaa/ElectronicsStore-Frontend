@@ -14,11 +14,12 @@ export default {
     PurchaseModal:false,
     BuyProduct:false,
     SuccessPurchase:false,
-    SuccessProductAddition:true,
+    SuccessProductAddition:false,
     Orders: [],
     GetStats:[],
     ProductRate: 0,
     RateRespons: "",
+    loadedchart: true,
   },
   mutations: {
     setUserCategories(state, Categories) {
@@ -187,7 +188,7 @@ export default {
         data:file
       })
       .then((response) => {
-        commit("setSuccessAddition",true);
+        commit("setSuccessAddition");
         console.log("Nerdeen", response);
       })
       .catch((error) => {
@@ -271,5 +272,6 @@ export default {
     SuccessProductAddition:state=>state.SuccessProductAddition, 
     GetStats:state=>state.GetStats,
     ProductRate:state=>state.ProductRate, 
+    loadedchart: state=>state.loadedchart,
   }
 };

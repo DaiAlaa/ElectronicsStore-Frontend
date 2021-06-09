@@ -55,8 +55,6 @@ export default {
           localStorage.setItem("X-token", token);
           axios.defaults.headers.common["Authorization"] = token;
           store.dispatch("Authorization/get_user", true);
-          console.log("Nerdeen", token);
-          ///////////////
         })
         .catch((error) => {
           commit("auth_faild");
@@ -75,7 +73,6 @@ export default {
           const token = response.data.access_token;
           localStorage.setItem("Authorization", token);
           axios.defaults.headers.common["Authorization"] = token;
-          console.log("login",token);
           store.dispatch("Authorization/get_user", true);
         })
         .catch((error) => {
@@ -86,16 +83,13 @@ export default {
     },
     get_user({ commit }, flag) {
       const token = localStorage.getItem("Authorization");
-      console.log("y :",token);
       axios.defaults.headers.common["Authorization"] = token;
       commit("auth_request");
       axios
         .get("http://localhost:7000/Admin/get-user")
         .then(response => {
           const user = response.data;
-          console.log("user:",user);
           commit("auth_success", { token, user });
-          console.log("status",status);
           // localStorage.setItem("is-admin", user.role);
           if (flag) router.replace("/");
         })
@@ -117,7 +111,6 @@ export default {
           router.replace("/ResetPassword");
     },
     reset_password({ commit }, payload) {
-      console.log("au",payload)
       axios.defaults.headers.common["x-auth-token"] = payload.token;
       axios
         .put("http://localhost:7000/auth/forget-password", {
