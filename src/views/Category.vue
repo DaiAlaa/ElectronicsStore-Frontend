@@ -104,7 +104,7 @@
   width: 8%;
   height: 6%;
   margin-top: 2%;
-  margin-left: 40%;
+  margin-left: 41%;
   position: absolute;
   background-color: white;
   color: #161516;
@@ -118,7 +118,7 @@
   width: 125px;
   height: 40px;
   margin-top: 2%;
-  margin-left: 660px;
+  margin-left: 50%;
   position: absolute;
   background: #313030;
   color: white;

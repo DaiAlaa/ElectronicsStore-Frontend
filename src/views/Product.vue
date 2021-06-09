@@ -180,7 +180,7 @@
   width: 125px;
   height: 40px;
   margin-top: 2%;
-  margin-left: 520px;
+  margin-left: 39%;
   position: absolute;
   background: #313030;
   color: white;
