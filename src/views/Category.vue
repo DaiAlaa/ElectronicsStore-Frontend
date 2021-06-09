@@ -7,7 +7,11 @@
       <button class="log">LOG IN</button>
     </router-link>
     <button class="userName" v-if="GetStatus == 'success'">
-        {{ Username }}
+        {{ Username | shorten}}
+        <i class="fa fa-user me"></i>
+    </button>
+    <button class="logout" v-if="GetStatus == 'success'">
+        LOG OUT
     </button>
     <router-link to="/AddProduct" v-if="UserRole == 'Admin' || UserRole == 'Employee'">
       <button class="add">
@@ -65,7 +69,7 @@
 .sign {
   border: none;
   border-radius: 20px;
-  width: 6%;
+  width: 8%;
   height: 6%;
   margin-left: 46%;
   margin-top: 2%;
@@ -94,13 +98,27 @@
 .log:hover {
   height: 6.5%;
 }
+.logout {
+  border: none;
+  border-radius: 20px;
+  width: 8%;
+  height: 6%;
+  margin-top: 2%;
+  margin-left: 40%;
+  position: absolute;
+  background-color: white;
+  color: #161516;
+  text-decoration: none;
+  outline: none;
+  font-weight: bold;
+}
 .userName {
   border: none;
   border-radius: 20px;
-  width: 8% auto;
-  height: 5%;
+  width: 125px;
+  height: 40px;
   margin-top: 2%;
-  margin-left: 52%;
+  margin-left: 660px;
   position: absolute;
   background: #313030;
   color: white;
@@ -108,6 +126,7 @@
   outline: none;
   padding-left: 15px;
   padding-right: 15px;
+  font-size: 18px;
 }
 .searchInput {
   margin-top: 13%;
@@ -211,6 +230,11 @@ h3 {
   margin-bottom: 120px;
   padding-left: 4%;
 }
+.me {
+  font-size: 20px;
+  color: white;
+  margin-left: 2%;
+}
 </style>
 
 <script>
@@ -285,6 +309,12 @@ export default {
     ...mapState({
        userProducts: state => state.Products.userProducts,
     })
+  },
+  filters: {
+    shorten: function (value) {
+      if (value && value.length > 7) return value.substring(0, 7) + "..";
+      else return value;
+    },
   },
 };
 </script>

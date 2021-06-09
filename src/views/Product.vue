@@ -1,20 +1,20 @@
 <template>
     <div class="productPage">
       <BuyProduct v-if="PurchaseModal"/>
-      <router-link to="/SignUp">
-        <button class="sign">
-          SIGN UP
-        </button>
-      </router-link>
-      <router-link to="/Login">
-        <button class="log">
-          LOG IN
-        </button>
-      </router-link>
+      <router-link to="/SignUp" v-if="GetStatus == '' || GetStatus == 'faild'">
+      <button class="sign">SIGN UP</button>
+    </router-link>
+    <router-link to="/Login" v-if="GetStatus == '' || GetStatus == 'faild'">
+      <button class="log">LOG IN</button>
+    </router-link>
+    <button class="userName" v-if="GetStatus == 'success'">
+        {{ Username | shorten}}
+        <i class="fa fa-user me"></i>
+    </button>
+    <button class="logout" v-if="GetStatus == 'success'">
+        LOG OUT
+    </button>
       <SuccessfulPurchase v-if="SuccessPurchase"/>
-      <!-- <button class="userName">
-        user name
-      </button> -->
     <hr />
     <div class="container">
       <div class="row row1" v-if="this.show">
@@ -57,8 +57,8 @@
           ></span>
           <hr>
           <h5 class="arrtibute">Add your review :</h5>
-          <div class="form-check-inline">
-            <label class="form-check-label option1">
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
               <input
                 type="radio"
                 class="form-check-input option2"
@@ -69,8 +69,8 @@
               1
             </label>
           </div>
-          <div class="form-check-inline">
-            <label class="form-check-label option1">
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
               <input
                 type="radio"
                 class="form-check-input option2"
@@ -81,8 +81,8 @@
               2
             </label>
           </div>
-          <div class="form-check-inline ">
-            <label class="form-check-label option1">
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
               <input
                 type="radio"
                 class="form-check-input option2"
@@ -93,8 +93,8 @@
               3
             </label>
           </div>
-          <div class="form-check-inline">
-            <label class="form-check-label option1">
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
               <input
                 type="radio"
                 class="form-check-input option2"
@@ -105,8 +105,8 @@
               4
             </label>
           </div>
-          <div class="form-check-inline">
-            <label class="form-check-label option1">
+          <div class="form-check-inline option1">
+            <label class="form-check-label">
               <input
                 type="radio"
                 class="form-check-input option2"
@@ -132,7 +132,7 @@
 .sign {
   border: none;
   border-radius: 20px;
-  width: 6%;
+  width: 8%;
   height: 6%;
   margin-left: 34%;
   margin-top: 2%;
@@ -160,13 +160,27 @@
 .sign:hover, .log:hover {
   height: 6.5%;
 }
+.logout {
+  border: none;
+  border-radius: 20px;
+  width: 8%;
+  height: 6%;
+  margin-top: 2%;
+  margin-left: 30%;
+  position: absolute;
+  background-color: white;
+  color: #161516;
+  text-decoration: none;
+  outline: none;
+  font-weight: bold;
+}
 .userName {
   border: none;
   border-radius: 20px;
-  width: 8% auto;
-  height: 5%;
+  width: 125px;
+  height: 40px;
   margin-top: 2%;
-  margin-left: 52%;
+  margin-left: 520px;
   position: absolute;
   background: #313030;
   color: white;
@@ -174,6 +188,7 @@
   outline: none;
   padding-left: 15px;
   padding-right: 15px;
+  font-size: 18px;
 }
 .container {
   height: 100%;
@@ -244,19 +259,25 @@
   z-index: 1000;
 }
 .option1 {
-  margin-left: 20px;
+  margin-bottom: 20px;
   color: #fff44f;
 }
-.option2 {
-  margin-right: 10px;
-}
+// .option2 {
+//   margin-right: 10px;
+// }
 .addButton {
   border: none;
   color: #161516;
   background-color: #fff44f;
   width: 22%;
   height: 5%;
-  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 30px;
+}
+.me {
+  font-size: 20px;
+  color: white;
+  margin-left: 2%;
 }
 // .row2 {
 //   width: 100%;
@@ -345,7 +366,10 @@ export default {
       PurchaseModal:"Products/PurchaseModal",
       ProductColor:"Products/ProductColor",
       SuccessPurchase:"Products/SuccessPurchase",
-      ProductRate: "Products/ProductRate"
+      ProductRate: "Products/ProductRate",
+      GetStatus: "Authorization/GetStatus",
+      UserRole: "Authorization/UserRole",
+      Username: "Authorization/Username",
     })
   },
   methods:{
@@ -361,6 +385,12 @@ export default {
    components: {
      BuyProduct,
      SuccessfulPurchase
-   }
+   },
+   filters: {
+    shorten: function (value) {
+      if (value && value.length > 7) return value.substring(0, 7) + "..";
+      else return value;
+    },
+  },
 }
 </script>
