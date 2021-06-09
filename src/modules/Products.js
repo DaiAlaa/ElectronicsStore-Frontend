@@ -19,7 +19,7 @@ export default {
     GetStats:[],
     ProductRate: 0,
     RateRespons: "",
-    loadedchart: true,
+    loadedchart: false,
   },
   mutations: {
     setUserCategories(state, Categories) {
@@ -69,6 +69,9 @@ export default {
     },
     setRateMutation (state, RateRespons){
       state.RateRespons = RateRespons;
+    },
+    setLoadedChart(state,load){
+      state.loadedchart=load;
     }
   },
   actions: {
@@ -234,8 +237,8 @@ export default {
           console.log(error);
         });
     },
-    ShowStats({commit}){
-      axios
+    async ShowStats({commit}){
+      await axios
         .get("http://localhost:7000/order/getStats")
         .then((response) => {
           let Stats = response.data;
@@ -244,10 +247,9 @@ export default {
           }
           console.log("in p",Stats);
           commit("setStats", Stats);
+          commit("setLoadedChart",true);
         })
         .catch((error) => {
-          let Stats = [];
-          commit("setStats", Stats);
           console.log(error);
         });
     }
