@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import router from "../router/index";
+var urlRequest = "https://electronic-store-back-end.herokuapp.com/";
 export default {
   namespaced: true,
   state: {
@@ -14,11 +15,12 @@ export default {
     PurchaseModal:false,
     BuyProduct:false,
     SuccessPurchase:false,
-    SuccessProductAddition:true,
+    SuccessProductAddition:false,
     Orders: [],
     GetStats:[],
     ProductRate: 0,
     RateRespons: "",
+    loadedchart: false,
   },
   mutations: {
     setUserCategories(state, Categories) {
@@ -68,12 +70,15 @@ export default {
     },
     setRateMutation (state, RateRespons){
       state.RateRespons = RateRespons;
+    },
+    setLoadedChart(state,load){
+      state.loadedchart=load;
     }
   },
   actions: {
     showUserCategories({ commit }) {
       axios
-        .get("http://localhost:7000/category/get")
+        .get(urlRequest + "category/get")
         .then((response) => {
           let Categories = response.data;
           if (response.status != 200) {
@@ -89,7 +94,7 @@ export default {
     },
     showUserProducts({ commit }, categoryId) {
       axios
-        .get("http://localhost:7000/product/get?categoryId=" + categoryId + "&pageNumber=1&pageSize=25") // pageNumber
+        .get(urlRequest + "product/get?categoryId=" + categoryId + "&pageNumber=1&pageSize=25") // pageNumber
         .then((response) => {
           console.log("categoryId" , categoryId);
           let Products = response.data;
@@ -106,7 +111,7 @@ export default {
     },
     showProduct({ commit }, productId) {
       axios
-        .get("http://localhost:7000/product/getOne?productId=" + productId)
+        .get(urlRequest + "product/getOne?productId=" + productId)
         .then((response) => {
           let Product = response.data;
           commit("setProductName", Product.name);
@@ -125,7 +130,7 @@ export default {
     searchProducts({ commit }, searchValue) {
       axios
         .get(
-          "http://localhost:7000/product/search?q=" +
+          urlRequest + "product/search?q=" +
             searchValue +
             "&pageNumber=1&pageSize=23"
         )
@@ -150,7 +155,7 @@ export default {
       console.log("in js",PurchaseInfo.productId);
       axios.defaults.headers.common["Authorization"] = localStorage.getItem("Authorization");
       axios.
-      post("http://localhost:7000/order/create"
+      post(urlRequest + "order/create"
         ,{
         productId:PurchaseInfo.productId,
         color:PurchaseInfo.color,
@@ -183,11 +188,11 @@ export default {
         });
       axios({
         method:"post",
-        url:"http://localhost:7000/product/create?creatorId="+ProductInfo.creatorId+"&categoryId="+ProductInfo.categoryId+"&name="+ProductInfo.name+"&price="+ProductInfo.price+"&description="+ProductInfo.description+"&colors="+JSON.stringify( ProductInfo.colors),
+        url: urlRequest+ "product/create?creatorId="+ProductInfo.creatorId+"&categoryId="+ProductInfo.categoryId+"&name="+ProductInfo.name+"&price="+ProductInfo.price+"&description="+ProductInfo.description+"&colors="+JSON.stringify( ProductInfo.colors),
         data:file
       })
       .then((response) => {
-        commit("setSuccessAddition",true);
+        commit("setSuccessAddition");
         console.log("Nerdeen", response);
       })
       .catch((error) => {
@@ -206,7 +211,7 @@ export default {
     },
     showOrders({ commit }) {
       axios
-        .get("http://localhost:7000/order/get?pageNumber=1&pageSize=20")
+        .get(urlRequest + "order/get?pageNumber=1&pageSize=20")
         .then((response) => {
           let Orders = response.data;
           if (response.status != 200) {
@@ -223,19 +228,20 @@ export default {
     setRate({ commit}, rate) {
       console.log("rate : ", rate);
       axios
-        .post("http://localhost:7000/product/rate?productId=" + rate, {
+        .post(urlRequest + "product/rate?productId=" + rate, {
         })
         .then((response) => {
           let RateRespons = response.data;
           commit("setRateMutation", RateRespons);
+          router.Replace("/Product");
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    ShowStats({commit}){
-      axios
-        .get("http://localhost:7000/order/getStats")
+    async ShowStats({commit}){
+      await axios
+        .get(urlRequest + "order/getStats")
         .then((response) => {
           let Stats = response.data;
           if (response.status != 200) {
@@ -243,10 +249,9 @@ export default {
           }
           console.log("in p",Stats);
           commit("setStats", Stats);
+          commit("setLoadedChart",true);
         })
         .catch((error) => {
-          let Stats = [];
-          commit("setStats", Stats);
           console.log(error);
         });
     }
@@ -271,5 +276,6 @@ export default {
     SuccessProductAddition:state=>state.SuccessProductAddition, 
     GetStats:state=>state.GetStats,
     ProductRate:state=>state.ProductRate, 
+    loadedchart: state=>state.loadedchart,
   }
 };

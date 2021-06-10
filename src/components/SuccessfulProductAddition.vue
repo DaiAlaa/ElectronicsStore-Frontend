@@ -45,6 +45,7 @@ div {
   width: 100%;
   height: 100%;
   z-index: 100;
+  // right:50%;
   background-color: transparent;
 
 
@@ -82,6 +83,7 @@ div {
   overflow: hidden;
   justify-content: center;
   margin: 0px;
+  z-index:100;
   // animation: UpsellShowAnimation 0.2s 1;
   // animation-fill-mode: both;
 }
@@ -202,14 +204,14 @@ button:focus {
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "SuccessfulPProductAddition",
+  name: "SuccessfulProductAddition",
   computed: {
     ...mapGetters({
-      SuccessSuccessProductAddition: "Products/SuccessSuccessProductAddition"
+      SuccessProductAddition: "Products/SuccessProductAddition"
     })
   },
   methods: {
-    SuccessfulPurchaseModalState() {
+    SuccessfulProductAdditionModalState() {
       this.$store.dispatch("Products/toggleSuccessfulAddition");
     }
   }

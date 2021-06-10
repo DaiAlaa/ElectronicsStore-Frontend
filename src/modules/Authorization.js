@@ -1,6 +1,7 @@
 import axios from "axios";
 import store from "../store";
 import router from "../router/index";
+var urlRequest = "https://electronic-store-back-end.herokuapp.com/";
 export default {
   namespaced: true,
   state: {
@@ -34,13 +35,16 @@ export default {
     },
     Reset_Mail(state,Mail){
       state.Mail=Mail;
+    },
+    auth_request(state){
+      state.status = "loading";
     }
   },
   actions: {
     signUp({ commit }, user) {
       commit("auth_request");
       axios
-        .post("http://localhost:7000/auth/sign-up", {
+        .post( urlRequest +  "auth/sign-up", {
           email: user.email,
           password: user.password,
           name: user.username,
@@ -53,10 +57,9 @@ export default {
           ///////////////////
           const token = response.data.access_token;
           localStorage.setItem("X-token", token);
+          localStorage.setItem("Authorization", token);
           axios.defaults.headers.common["Authorization"] = token;
           store.dispatch("Authorization/get_user", true);
-          console.log("Nerdeen", token);
-          ///////////////
         })
         .catch((error) => {
           commit("auth_faild");
@@ -67,7 +70,7 @@ export default {
     login({ commit }, user) {
       commit("auth_request");
       axios
-        .post("http://localhost:7000/auth/login", {
+        .post( urlRequest + "auth/login", {
           email: user.email,
           password: user.password,
         })
@@ -75,7 +78,6 @@ export default {
           const token = response.data.access_token;
           localStorage.setItem("Authorization", token);
           axios.defaults.headers.common["Authorization"] = token;
-          console.log("login",token);
           store.dispatch("Authorization/get_user", true);
         })
         .catch((error) => {
@@ -86,16 +88,13 @@ export default {
     },
     get_user({ commit }, flag) {
       const token = localStorage.getItem("Authorization");
-      console.log("y :",token);
       axios.defaults.headers.common["Authorization"] = token;
       commit("auth_request");
       axios
-        .get("http://localhost:7000/Admin/get-user")
+        .get(urlRequest + "Admin/get-user")
         .then(response => {
           const user = response.data;
-          console.log("user:",user);
           commit("auth_success", { token, user });
-          console.log("status",status);
           // localStorage.setItem("is-admin", user.role);
           if (flag) router.replace("/");
         })
@@ -117,10 +116,9 @@ export default {
           router.replace("/ResetPassword");
     },
     reset_password({ commit }, payload) {
-      console.log("au",payload)
       axios.defaults.headers.common["x-auth-token"] = payload.token;
       axios
-        .put("http://localhost:7000/auth/forget-password", {
+        .put( urlRequest + "auth/forget-password", {
           email:payload.email,
           newPassword: payload.newPassword,
           newPasswordRepeat:payload.newPasswordRepeat

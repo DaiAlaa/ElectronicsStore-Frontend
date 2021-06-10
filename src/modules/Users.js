@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "../store";
+var urlRequest = "https://electronic-store-back-end.herokuapp.com/";
 export default {
   namespaced: true,
   state: {
@@ -22,7 +23,7 @@ export default {
   actions: {
     showAllUsers({ commit }) {
       axios
-        .get("http://localhost:7000/Admin/get-all-users")
+        .get(urlRequest + "Admin/get-all-users")
         .then((response) => {
           let Users = response.data;
           if (response.status != 200) {
@@ -39,7 +40,7 @@ export default {
     },
     DeleteUser({commit}, userId) {
       axios
-        .delete("http://localhost:7000/Admin/delete-user?userId=" + userId)
+        .delete(urlRequest + "Admin/delete-user?userId=" + userId)
         .then(() => {
           commit("setA", "a");
           store.dispatch("Users/showAllUsers"); 
@@ -51,7 +52,7 @@ export default {
     CreateAdminEmplyee({ commit, state }, user) {
       console.log("yarab");
       axios
-        .post("http://localhost:7000/Admin/create-user", {
+        .post(urlRequest + "Admin/create-user", {
           email: user.email,
           password: user.password,
           name: user.name,

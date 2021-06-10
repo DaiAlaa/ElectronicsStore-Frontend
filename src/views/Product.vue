@@ -379,7 +379,9 @@ export default {
       console.log("after",this.PurchaseModal);
     },
     setRate(){
+      
       this.$store.dispatch("Products/setRate", this.ProductId + "&rate=" + this.Rate);
+
     },
     logout(){
        this.$store.dispatch("Authorization/logout");

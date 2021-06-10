@@ -73,7 +73,7 @@
             id="Floor"
           />
           <br /> -->
-          <p>Creidt Card</p>
+          <p>Credit Card</p>
           <input
             class="input_field"
             type="text"
@@ -296,7 +296,7 @@ export default {
       MobileNumber:"",
       city: "0",
       cities: [
-        { text: "Choose a country", value: "0", disabled: true },
+        { text: "Choose a city", value: "0", disabled: true },
         { text: "Alexandria", value: "Alex", disabled: false },
         { text: "Aswan", value: "Aswan", disabled: false },
         { text: "Asyut", value: "Asyut", disabled: false },
@@ -326,7 +326,7 @@ export default {
         { text: "Suez", value: "Suez", disabled: false },
       ],
       color:"",
-      StreetName:"0",
+      StreetName:"",
       BuildingNumber:"0",
       FloorNumber:"",
       CreditCard:"",
