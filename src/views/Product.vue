@@ -21,7 +21,7 @@
         <div class="col">
           <img
             class="productImage"
-            :src="'http://localhost:7000/image/get?imageId='+ ProductImage"
+            :src="'https://electronic-store-back-end.herokuapp.com/image/get?imageId='+ ProductImage"
             alt="Card image"
             id="cardimg"
           />

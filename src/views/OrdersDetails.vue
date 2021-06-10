@@ -9,7 +9,7 @@
       <div class="col">
         <img
           class="productImage"
-          :src="'http://localhost:7000/image/get?imageId=' + order.product.imageId"
+          :src="'https://electronic-store-back-end.herokuapp.com/image/get?imageId=' + order.product.imageId"
           alt="Card image"
           id="cardimg"
         />

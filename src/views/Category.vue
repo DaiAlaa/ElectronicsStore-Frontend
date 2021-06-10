@@ -45,7 +45,7 @@
         :ProductId="Product._id"
         :ProductPrice="Product.price"
         :imageId="Product.imageId"
-        :images="'http://localhost:7000/image/get?imageId=' + Product.imageId"
+        :images="'https://electronic-store-back-end.herokuapp.com/image/get?imageId=' + Product.imageId"
       />
     </div>
     <div class="row searchRow" v-if="SearchValue != '' && searchResults.length != 0">
@@ -56,7 +56,7 @@
         :ProductId="Product._id"
         :ProductPrice="Product.price"
         :imageId="Product.imageId"
-        :images="'http://localhost:7000/image/get?imageId=' + Product.imageId"
+        :images="'https://electronic-store-back-end.herokuapp.com/image/get?imageId=' + Product.imageId"
       />
     </div>
     <p class="notFound" v-if="SearchValue != '' && searchResults.length == 0 && this.notFound">Not Found</p>
