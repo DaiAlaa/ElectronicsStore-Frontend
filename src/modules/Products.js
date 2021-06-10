@@ -96,7 +96,6 @@ export default {
       axios
         .get(urlRequest + "product/get?categoryId=" + categoryId + "&pageNumber=1&pageSize=25") // pageNumber
         .then((response) => {
-          console.log("categoryId" , categoryId);
           let Products = response.data;
           // if (response.status != 200) {
           //   Products = [];
@@ -121,7 +120,6 @@ export default {
           commit("setProductImage", Product.imageId);
           commit("setProductColors",Product.colors);
           commit("setProductRate",Product.rate);
-          console.log("kooooo" , Product.rate);
         })
         .catch((error) => {
           console.log(error);
@@ -139,7 +137,6 @@ export default {
           if (response.status != 200) {
             searchProducts = [];
           }
-          console.log("searchValue : ", searchValue);
           commit("setSearchProducts", searchProducts);
         })
         .catch((error) => {
@@ -152,7 +149,6 @@ export default {
       // });
     },
     Buy_Product({commit},PurchaseInfo){
-      console.log("in js",PurchaseInfo.productId);
       axios.defaults.headers.common["Authorization"] = localStorage.getItem("Authorization");
       axios.
       post(urlRequest + "order/create"
@@ -164,39 +160,25 @@ export default {
         creditCard:PurchaseInfo.CreditCard
       })
       
-      .then((response) => {
+      .then(() => {
         commit("setSuccessPurchase");
-        console.log("Nerdeen", response);
       })
       .catch((error) => {
-        console.log("in js error",PurchaseInfo.productId);
         console.log(error);
       });
     },
     Add_Product({commit},ProductInfo){
-      console.log("p js",ProductInfo);
       const file = new FormData();
       file.append("file", ProductInfo.file);
-      console.log("p3 js",{
-        creatorId:ProductInfo.creatorId,
-        categoryId:"60bef33e55fac81818313490",
-        name:ProductInfo.name,
-        price:ProductInfo.price,
-        file:file,
-        description:ProductInfo.description,
-        colors:JSON.stringify( ProductInfo.colors)
-        });
       axios({
         method:"post",
         url: urlRequest+ "product/create?creatorId="+ProductInfo.creatorId+"&categoryId="+ProductInfo.categoryId+"&name="+ProductInfo.name+"&price="+ProductInfo.price+"&description="+ProductInfo.description+"&colors="+JSON.stringify( ProductInfo.colors),
         data:file
       })
-      .then((response) => {
+      .then(() => {
         commit("setSuccessAddition");
-        console.log("Nerdeen", response);
       })
       .catch((error) => {
-        console.log("Nerdeen", error);
         console.log(error);
       });
     },
@@ -226,7 +208,6 @@ export default {
         });
     },
     setRate({ commit}, rate) {
-      console.log("rate : ", rate);
       axios
         .post(urlRequest + "product/rate?productId=" + rate, {
         })
@@ -247,7 +228,6 @@ export default {
           if (response.status != 200) {
             Stats = [];
           }
-          console.log("in p",Stats);
           commit("setStats", Stats);
           commit("setLoadedChart",true);
         })

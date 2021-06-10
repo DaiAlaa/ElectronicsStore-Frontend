@@ -119,7 +119,7 @@
           </div>
           <button @click="setRate()" class="addButton">  Add </button>
           <hr />
-          <button class="buy" @click="OpenPurchaseForm()">Buy Now</button>
+          <button class="buy" @click="isLogged()">Buy Now</button>
         </div>
       </div>
     </div>
@@ -292,6 +292,7 @@
 import { mapGetters } from "vuex";
 import BuyProduct from "@/components/BuyProduct.vue";
 import SuccessfulPurchase from "@/components/SuccessfulPurchase.vue";
+// import router from "../router/index";
 export default {
     name: "Product",
     data: function() {
@@ -385,6 +386,14 @@ export default {
     },
     logout(){
        this.$store.dispatch("Authorization/logout");
+    },
+    isLogged() {
+      if (this.GetStatus == "success"){
+         this.OpenPurchaseForm();
+      }
+      else {
+       this.$store.dispatch("Authorization/goLogin");
+      }
     }
   },
    components: {

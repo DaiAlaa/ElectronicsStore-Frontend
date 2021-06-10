@@ -112,7 +112,6 @@ export default {
     reset({ commit }, Mail) {
           commit("logout");
           commit("Reset_Mail",Mail.email);
-          console.log("in reset",Mail.email)
           router.replace("/ResetPassword");
     },
     reset_password({ commit }, payload) {
@@ -132,6 +131,9 @@ export default {
           delete axios.defaults.headers.common["x-auth-token"];
         });
     },
+    goLogin(){
+      router.replace("/login");
+    }
   },
   getters: {
     Username: (state) => state.User.name,

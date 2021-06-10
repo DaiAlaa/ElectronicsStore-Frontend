@@ -62,16 +62,12 @@ export default {
           address: user.address,
         })
         .then((response) => {
-          console.log("wsl");
           state.userRespons = response.data;
           commit("isAdded", "success");
-          console.log("status : ", state.status);
         })
         .catch((error) => {
-          console.log("wsllll");
           commit("isAdded", "failed");
           console.log(error);
-          console.log("status : ", state.status);
         });
     },
   },
